@@ -1,0 +1,2 @@
+# StrikeOffApp
+MyOwnWebIdea
