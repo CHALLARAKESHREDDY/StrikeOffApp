@@ -1,0 +1,11 @@
+POST http://localhost:5007/tasks
+Content-Type: application/json
+
+{
+    "username": "rakeshChalla",
+    "password": "rak@1237t",
+    "emailAddress":"rakesh@gmail.com"
+}
+
+
+###

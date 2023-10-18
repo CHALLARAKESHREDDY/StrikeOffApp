@@ -1,0 +1,19 @@
+.Login-Container{
+    width:200px;
+    height:230px;
+    background-color:#200B62;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 11px;
+    margin:10px;
+}
+
+.Who-are-you-Container{
+    height:100vh;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:#0D042A;
+}
