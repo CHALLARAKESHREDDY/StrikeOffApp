@@ -26,3 +26,10 @@ body{
     text-underline-offset: 0.25em;
     cursor: pointer;
 }
+
+.errorMsgLogin{
+    color:red;
+    margin:7px;
+    width:10px;
+    width:100%;
+}

@@ -10,6 +10,7 @@ function SignupPage(){
     const [username,changeUsername]=useState("")
     const [password,changePassword]=useState("")
     const [emailAddress,changeEmailAddress]=useState("")
+    const [errorMsg,changeErrormsg]=useState("")
 
 
 
@@ -20,31 +21,42 @@ function SignupPage(){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("kk")
+        
+        if (!username || !password || !emailAddress) {
+            changeErrormsg('All fields are required');
+            return;
+          }
+
+          else if (emailAddress.endsWith("gmail.com")===false){
+            changeErrormsg("Invalid Email Address")
+          }
+          else if(password.length < 6) {
+            changeErrormsg('Password is too short (minimum 6 characters).');
+            return;
+          }
+
+          else if (username.length<6){
+            changeErrormsg("Username should have more than 5 charecters")
+            return ;
+          }
+
+          else{
+      
       
         try {
-            const response = await Axios.post('http://localhost:8001/tasks', {username:username, password: password,emailAddress:emailAddress});
-
-            if (response.status === 200) {
-              console.log('User registered successfully!');
-              // You can also redirect the user to a login page or do other actions here.
-            }
-            if (response.status === 409 ){
-              console.log('User with the same username already exists');
-            }
-            if (response.status === 400 ){
-                console.log("Password is too short (minimum 6 characters)")
-            }
-            if(response.status === 407){
-                console.log("emailAddress already exists");
-            }
+            const response = await Axios.post('http://localhost:3007/tasks', {username:username, password: password,emailAddress:emailAddress});
+           
+            changeErrormsg(response.data)
+          
+          
           } catch (error) {
             console.log('An error occurred. Please try again later.');
             // You can also log the error to the console for debugging.
             console.error('Error:', error);
           }
+        }
       };
-
+ 
 
 
 
@@ -52,15 +64,17 @@ function SignupPage(){
         <div className="Signuppage-Container">
             <form className="signup-Form"  >
                 <h1>Create Account</h1>
-                <input type="text" placeholder='Email Adsress' onChange={(event)=>changeEmailAddress(event.target.value)} />
+                <input value={emailAddress} type="email" placeholder='Email Adsress' onChange={(event)=>changeEmailAddress(event.target.value)} />
                 <br />
-                <input type="username" placeholder='Username' onChange={(event)=>changeUsername(event.target.value)} />
+                <input value={username} type="username" placeholder='Username' onChange={(event)=>changeUsername(event.target.value)} />
                     <br />
-                <input type="password" placeholder='Password' onChange={(event)=>changePassword(event.target.value)}/>
+                <input value={password} type="password" placeholder='Password' onChange={(event)=>changePassword(event.target.value)}/>
                 <br/>
                 <button type="button" onClick={handleSubmit}>Signup</button>
                 <p>Already have an account? <span className="Login-Text" onClick={changeRouteToLoginPage}>Log In</span> </p>
+                {errorMsg.length>1? <p className="errorMsg">{errorMsg}</p>:null} 
             </form>
+          
         </div>
     )
 }

@@ -5,7 +5,8 @@ app.use(express.json())
 
 const cors = require('cors'); // Import the cors middleware
 app.use(cors());
-const port = process.env.PORT || 3000;
+app.use(cors({ origin: '*' }))
+
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
@@ -23,8 +24,8 @@ const connection = async () => {
     try {
         await mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true });
         console.log('Connected to MongoDB');
-        app.listen(8001, () => {
-            console.log(`Server is running on port ${5000}`);
+        app.listen(3007, () => {
+            console.log(`Server is running on port ${3007}`);
         });
     } catch (err) {
         console.error('Error connecting to MongoDB:', err);
@@ -135,6 +136,7 @@ const Task = mongoose.model('Task', taskSchema);
 
 app.post('/tasks', async (req, res) => {
   const { username, password, emailAddress } = req.body;
+  
 
   try {
       const existingUser = await Task.findOne({ $or: [{ username }, { emailAddress }] }).exec();
@@ -144,34 +146,98 @@ app.post('/tasks', async (req, res) => {
 
           if (existingUser.username === username) {
               errors.username = 'Username already exists';
+            
+              res.send("Username already exists")
               return res.status(409)
           }
 
           if (existingUser.emailAddress === emailAddress) {
               errors.emailAddress = 'Email already exists';
+           
+              res.send("Email Already exits")
               return res.status(407)
           }
 
          
       }
 
-      if (password.length < 6) {
-          return res.status(400).json({ error: 'Password is too short (minimum 6 characters)' });
-      }
-      Task.create({ username, password, emailAddress })
+    
+      else{
+        await Task.create({ username, password, emailAddress })
       .then((task) => {
-          res.status(200); // Status 201 for resource creation
-          console.log('Data inserted');
+           res.status(200)
+         
+          res.send("User registered successfully!")
       })
       .catch((error) => {
           res.status(500).json({ error: 'Error creating task' });
-      });
+      }); }
 
     } catch (error) {
       res.status(500).json({ error: 'Error creating user' });
+      res.send( {error: 'Error creating user' })
   }
      
 });
+
+
+app.post('/login',async(req,res)=>{
+    const {username,password} = req.body
+
+    try{
+        const existingUser = await Task.findOne({ $and: [{ username }, { password }] }).exec();
+        
+        if (existingUser!==null){
+            res.send("Valid User")
+        }else{
+            res.send("User NotFound")
+        }
+
+    }catch (error) {
+        res.status(500)
+        res.send( 'Error creating user' )
+    }
+
+})
+  
+       /* if (existingUser) {
+            const errors = {};
+  
+            if (existingUser.username === username) {
+                errors.username = 'Username already exists';
+              
+                res.send("Username already exists")
+                return res.status(409)
+            }
+  
+            if (existingUser.emailAddress === emailAddress) {
+                errors.emailAddress = 'Email already exists';
+             
+                res.send("Email Already exits")
+                return res.status(407)
+            }
+  
+           
+        }
+  
+      
+        else{
+          await Task.create({ username, password, emailAddress })
+        .then((task) => {
+             res.status(200)
+           
+            res.send("User registered successfully!")
+        })
+        .catch((error) => {
+            res.status(500).json({ error: 'Error creating task' });
+        }); }
+  
+      } catch (error) {
+        res.status(500).json({ error: 'Error creating user' });
+        res.send( {error: 'Error creating user' })
+    }*/
+
+
 
 
 

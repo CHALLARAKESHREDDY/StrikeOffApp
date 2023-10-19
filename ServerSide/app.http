@@ -1,11 +1,20 @@
-POST http://localhost:5007/tasks
+POST http://localhost:3007/tasks/
 Content-Type: application/json
 
 {
-    "username": "rakeshChalla",
-    "password": "rak@1237t",
-    "emailAddress":"rakesh@gmail.com"
+    "username": "rakeshChala",
+    "password": "rak@1237ta",
+    "emailAddress":"raksh@gmail.com"
 }
 
+
+###
+POST  http://localhost:3007/login/ 
+Content-Type: application/json
+
+{
+   "username": "rakeshChall",
+    "password": "rak@1237t"
+}
 
 ###
