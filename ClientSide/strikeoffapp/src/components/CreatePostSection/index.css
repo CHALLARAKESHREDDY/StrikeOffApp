@@ -1,0 +1,132 @@
+.Create-Post-Button{
+    background-color:#774DFF ;
+    width:140px;
+    height:40px;
+    border-radius: 10px;
+    border-style:none ;
+    color: #ffffff;
+    margin:5px;
+    font-size: 17px;
+    font-weight: bold;
+ display:flex;
+ align-items: center;
+ justify-content: center;
+ margin-left:25px;
+}
+
+.Popup-Container{
+    height: 80vh;
+    width: 100vh;
+    display:flex;
+    flex-direction: column;
+    align-self: center;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2); /* Lighter color with 20% transparency for a frosted glass effect */
+    backdrop-filter: blur(5px); /* Apply a blur effect to simulate frosted glass */ 
+    border: 1px solid #ffffff;
+    border-radius: 25px;
+}
+
+
+/* index.css */
+.ReactModal__Overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.9); 
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  .ReactModal__Content {
+    background: white;
+    border: 1px solid #ccc;
+ 
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 80%;
+    width: 800px; /* Adjust as needed */
+  }
+  
+  .Close-Button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+ 
+  }
+  
+  .Popup-Container h1 {
+    text-align: center;
+  }
+
+
+  /* index.css */
+.ReactModal__Overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000; /* Make sure the z-index is high enough */
+  }
+  
+  .ReactModal__Content {
+    background: rgba(255, 255, 255, 0.9); /* White background with 90% transparency */
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 80%;
+    width: 400px; /* Adjust as needed */
+  }
+  
+
+  
+  .Popup-Container h1 {
+    text-align: center;
+    color: white;
+    font-size: 26px;
+    font-weight: 600;
+  }
+  
+
+  label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  select,
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .Submit-Button {
+    background-color: #0073e6;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+  
+  .Submit-Button:hover {
+    background-color: #005abf;
+  }
+  
