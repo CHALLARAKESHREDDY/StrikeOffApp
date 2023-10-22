@@ -2,61 +2,10 @@ import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 import './index.css';
 
-const categoryList = ["Clothing", "Beauty", "Footwear", "Entertainment", "Other"];
-const subCategoryList = {
-  Clothing: [
-    'Fashion',
-    'Apparel',
-    'Style',
-    'Wardrobe',
-    'Dress',
-    'Accessories',
-    'Designer',
-    'Trends',
-    'Fabric',
-    'Outfit'
-  ],
-  Beauty: [
-    'Makeup',
-    'Skincare',
-    'Cosmetics',
-    'Glamour',
-    'Wellness',
-    'Aesthetics',
-    'Beauty salon',
-    'Perfume',
-    'Radiant',
-    'Pampering'
-  ],
-  Entertainment: [
-    'Movies',
-    'Music',
-    'Gaming',
-    'Theater',
-    'Celebrities',
-    'Leisure',
-    'Recreation',
-    'Events',
-    'Amusement',
-    'Pop culture'
-  ],
-  Footwear: [
-    'Shoes',
-    'Sneakers',
-    'Boots',
-    'Sandals',
-    'High heels',
-    'Athletic footwear',
-    'Comfort',
-    'Shoelaces',
-    'Shoe store',
-    'Sole'
-  ]
-};
+const categoryList = ["Clothing", "Beauty", "Footwear", "Entertainment", "Health","Financial"];
 
 const ReactPopup = () => {
   const [selectedCategory, setSelectedCategory] = useState('Clothing');
-  const [selectedSubCategory, setSelectedSubCategory] = useState(subCategoryList['Clothing'][0]);
   const [otherSubcategory, setOtherSubcategory] = useState('');
   const [productName, setProductName] = useState('');
   const [description, setDescription] = useState('');
@@ -66,10 +15,6 @@ const ReactPopup = () => {
   const handleCategoryChange = (event) => {
     const selectedCategory = event.target.value;
     setSelectedCategory(selectedCategory);
-
-    if (selectedCategory !== 'Other') {
-      setSelectedSubCategory(subCategoryList[selectedCategory][0]);
-    }
   };
 
   const handleSubmit = (e) => {
@@ -117,32 +62,17 @@ const ReactPopup = () => {
                 </div>
                 {selectedCategory === 'Other' ? (
                   <div>
-                    <label htmlFor="otherSubcategory">Enter Other Subcategory:</label>
+                    <label htmlFor="otherSubcategory">Enter Other Category:</label>
                     <input
                       type="text"
-                      id="otherSubcategory"
+                      id="otherCategory"
                       value={otherSubcategory}
                       onChange={(event) => setOtherSubcategory(event.target.value)}
                     />
                   </div>
-                ) : selectedCategory ? (
-                  <div>
-                    <label htmlFor="subCategorySelect">Select Subcategory:</label>
-                    <select
-                      id="subCategorySelect"
-                      value={selectedSubCategory}
-                      onChange={(event) => setSelectedSubCategory(event.target.value)}
-                    >
-                      {subCategoryList[selectedCategory].map((subcategory, index) => (
-                        <option key={index} value={subcategory}>
-                          {subcategory}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
                 ) : null}
                 <div>
-                  <label htmlFor="productName">Product Name:</label>
+                  <label htmlFor="productName">Product/Platform Name:</label>
                   <input
                     type="text"
                     id="productName"

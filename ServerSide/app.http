@@ -18,3 +18,16 @@ Content-Type: application/json
 }
 
 ###
+
+POST http://localhost:3007/productDetails/
+Content-Type: application/json
+
+{
+    "category":"Clothings",
+    "productName":"Lensckart",
+    " description": "String",
+  "imageUrl": "String",
+}
+
+
+###s

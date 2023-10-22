@@ -1,6 +1,7 @@
 
 import {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
 import axios from 'axios'
 import './index.css'
  
@@ -23,11 +24,22 @@ function LoginPage(){
 
         try{
             let response = await axios.post('http://localhost:3007/login', {username:emailAddress, password: password})
-            changeErrormsg(response.data)
+           
+            if (response.data.resultMsg==="Login Successfull"){
+                await Cookies.set("jwtToken",response.data.jwtToken,{expires:3})
+                await changeErrormsg("your JWT has been set! Now you can start Saving")
+                await history("/home")
+
+            }else{
+                changeErrormsg(response.data.resultMsg)
+            }
+           
          
         }catch(e){
             changeErrormsg(e.message)
         }
+
+       
     }
 
     const changeRouteToSignupPage=()=>{
@@ -45,6 +57,7 @@ function LoginPage(){
                 <button type="button" onClick={onSubmitForm} >Login</button>
                 <p>Don’t have an account? <span className="Signup-Text" onClick={changeRouteToSignupPage}>Sign Up</span></p>
                 {errorMsg.length>1? <p className="errorMsgLogin">{errorMsg}</p>:null} 
+                
             </form>
         </div>
     )

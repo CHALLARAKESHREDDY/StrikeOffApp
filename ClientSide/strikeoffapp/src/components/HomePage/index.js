@@ -1,14 +1,30 @@
 import { Component } from "react";
+import Cookies from "js-cookie";
+import { Navigate } from "react-router-dom";
 import { HiOutlineLogout} from "react-icons/hi";
 import {FaBriefcase} from 'react-icons/fa'
 import {BiSolidMessageDots} from 'react-icons/bi'
 import {MdAccountBox} from 'react-icons/md'
 import {AiTwotoneHome} from 'react-icons/ai'
 import ReactPopup from "../CreatePostSection";
+import NavigateWrapper from '../NavigatorComponent';
 import './index.css'
 
 class HomePage extends Component{
+
+    navigateToSomePage = (navigate) => {
+        Cookies.remove("jwtToken")
+        navigate('/login');
+      }
+     
     render(){
+
+        if (Cookies.get("jwtToken") === undefined) {
+            return (
+                <Navigate to="/login" replace={true} />
+              )
+          }
+
         return(
             <div className="Home-Container">
                 <div className="Side-Bar">
@@ -22,7 +38,14 @@ class HomePage extends Component{
              
                     </div>
                     <div className="Logout-Container">
-                     <HiOutlineLogout className="Logout-Logo" />
+                    
+                     <NavigateWrapper>
+          {(navigate) => (
+        
+              <HiOutlineLogout className="Logout-Logo" onClick={() => this.navigateToSomePage(navigate)}/>
+           
+          )}
+        </NavigateWrapper>
                      <p className="Logout-Text">Logout</p>
                     </div>
                    
@@ -53,4 +76,4 @@ class HomePage extends Component{
 }
 
 
-export default HomePage
+export default HomePage;
