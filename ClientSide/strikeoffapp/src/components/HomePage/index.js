@@ -1,5 +1,6 @@
 import { Component } from "react";
 import Cookies from "js-cookie";
+import  Axios from "axios";
 import { Navigate } from "react-router-dom";
 import { HiOutlineLogout} from "react-icons/hi";
 import {FaBriefcase} from 'react-icons/fa'
@@ -7,10 +8,30 @@ import {BiSolidMessageDots} from 'react-icons/bi'
 import {MdAccountBox} from 'react-icons/md'
 import {AiTwotoneHome} from 'react-icons/ai'
 import ReactPopup from "../CreatePostSection";
+import CardItem from "../CardItem";
 import NavigateWrapper from '../NavigatorComponent';
 import './index.css'
 
 class HomePage extends Component{
+
+    constructor(){
+        super()
+        this.state={cardsItems:[],isLoading:true}
+    }
+
+    componentDidMount=()=>{
+        this.getDataFromDb()
+    } 
+
+    getDataFromDb=async()=>{
+        try{
+        const response=await Axios.get('http://localhost:3007/cards/')
+        this.setState({cardsItems:response.data,isLoading:false})
+             
+        }catch (e){
+            console.log(e.message)
+        }
+    }
 
     navigateToSomePage = (navigate) => {
         Cookies.remove("jwtToken")
@@ -18,6 +39,8 @@ class HomePage extends Component{
       }
      
     render(){
+      
+        const { isLoading ,cardsItems} = this.state;
 
         if (Cookies.get("jwtToken") === undefined) {
             return (
@@ -57,13 +80,10 @@ class HomePage extends Component{
                     <ReactPopup />
                    </div>
                 <div className="Cards-Container">
-                    <div className="Cards">
-                        <div><img className="Card-Image" src="https://img.freepik.com/free-photo/pretty-young-stylish-sexy-woman-pink-luxury-dress-summer-fashion-trend-chic-style-sunglasses-blue-studio-background-shopping-holding-paper-bags-talking-mobile-phone-shopaholic_285396-2957.jpg?w=1060&t=st=1697736877~exp=1697737477~hmac=7fbd6925b921bb9e05ebac81e9b9795ddea0b1c1bffddeaa3378c1d62710231b" alt="shopping-img"/></div>
-                        <div className="Description-Container">
-                            <p>Heading</p>
-                            <p>Description</p>
-                        </div>
-                    </div>
+                     {isLoading?
+                     <p>Loading...</p>:cardsItems.map(item=>(<CardItem item={item} key={item.id}/>))
+                     }
+                      
                 </div>
                
                 </div>

@@ -16,9 +16,13 @@ body{
     width:25%;
     height:60%;
     background-color: #200B62;
-    box-shadow: 0 0 10px rgba(233, 31, 189, 0.5);
+    box-shadow: 0 0 30px rgba(233, 31, 189, 0.5);
     border-radius: 10px;
     color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .Login-Text{
@@ -27,9 +31,32 @@ body{
     cursor: pointer;
 }
 
-.errorMsg{
-    color:red;
-    margin:7px;
-    width:10px;
-    width:100%;
-}
+
+.Login-Input{
+    width: 70%;
+    padding: 10px;
+   margin:0px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Style for the login button */
+  button {
+    width: 40%;
+    padding: 10px;
+    background-color: #4CAF50; /* Green color (you can change this) */
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  /* Style for the error message */
+  .errorMsg {
+    color: red;
+    margin: 7px;
+    width: 100%;
+  }

@@ -120,6 +120,7 @@ app.post('/login',async(req,res)=>{
 const productDetailsSchema = new mongoose.Schema({
     category: String,
     productName: String,
+    couponCode:String,
     description: String,
     imageUrl: String,
   });
@@ -148,14 +149,26 @@ const productDetailsSchema = new mongoose.Schema({
 
 
 app.post('/productDetails', async (req, res) => {
-  const { category, productName, description, imageUrl } = req.body;
+  const { category, productName,couponCode,description, imageUrl } = req.body;
+  console.log(category)
 
-  await productDetails.create({ category, productName, description, imageUrl })
+  await productDetails.create({ category, productName,couponCode, description, imageUrl })
     .then(() => {
-      res.status(200).json({ message: 'Data posted successfully' });
+      res.status(200)
+      
+      res.send("Data posted successfully")
     })
     .catch((error) => {
-      res.status(500).json({ error: 'Error posting data' });
+      res.status(500);
+      res.send('Error posting data')
     });
 });
 
+app.get('/cards', async (req, res) => {
+  try {
+    const cards = await productDetails.find(); // Retrieve all documents from the "productDetails" collection
+    res.status(200).json(cards);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching cards' });
+  }
+});

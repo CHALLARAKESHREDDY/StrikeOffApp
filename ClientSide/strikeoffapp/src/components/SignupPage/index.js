@@ -64,11 +64,11 @@ function SignupPage(){
         <div className="Signuppage-Container">
             <form className="signup-Form"  >
                 <h1>Create Account</h1>
-                <input value={emailAddress} type="email" placeholder='Email Adsress' onChange={(event)=>changeEmailAddress(event.target.value)} />
+                <input className="Login-Input" value={emailAddress} type="email" placeholder='Email Adsress' onChange={(event)=>changeEmailAddress(event.target.value)} />
                 <br />
-                <input value={username} type="username" placeholder='Username' onChange={(event)=>changeUsername(event.target.value)} />
+                <input  className="Login-Input" value={username} type="username" placeholder='Username' onChange={(event)=>changeUsername(event.target.value)} />
                     <br />
-                <input value={password} type="password" placeholder='Password' onChange={(event)=>changePassword(event.target.value)}/>
+                <input className="Login-Input" value={password} type="password" placeholder='Password' onChange={(event)=>changePassword(event.target.value)}/>
                 <br/>
                 <button type="button" onClick={handleSubmit}>Signup</button>
                 <p>Already have an account? <span className="Login-Text" onClick={changeRouteToLoginPage}>Log In</span> </p>

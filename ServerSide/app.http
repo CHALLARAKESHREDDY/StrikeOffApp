@@ -23,11 +23,12 @@ POST http://localhost:3007/productDetails/
 Content-Type: application/json
 
 {
-    "category":"Clothings",
-    "productName":"Lensckart",
-    " description": "String",
-  "imageUrl": "String",
+    "category": "Clothings",
+    "productName": "Lensckart",
+    "couponCode" :"4FG7904VH",
+    "description": "Some description text",
+    "imageUrl": "https://example.com/image.jpg"
 }
+###
 
-
-###s
+GET http://localhost:3007/cards/

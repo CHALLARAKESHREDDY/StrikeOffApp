@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
+import  Axios from 'axios';
 import Popup from 'reactjs-popup';
 import './index.css';
 
 const categoryList = ["Clothing", "Beauty", "Footwear", "Entertainment", "Health","Financial"];
 
 const ReactPopup = () => {
-  const [selectedCategory, setSelectedCategory] = useState('Clothing');
+  const [category, setSelectedCategory] = useState('Clothing');
   const [otherSubcategory, setOtherSubcategory] = useState('');
   const [productName, setProductName] = useState('');
+  const [couponCode,changeCouponCode] = useState("")
   const [description, setDescription] = useState('');
-  const [photo, setPhoto] = useState(null);
+  const [imageUrl, setPhoto] = useState("");
+  const [errorMsg,changeErorMsg]=useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const handleCategoryChange = (event) => {
@@ -17,9 +20,32 @@ const ReactPopup = () => {
     setSelectedCategory(selectedCategory);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    setSubmitted(true);
+    
+    if (!productName || !description || !imageUrl || !couponCode){
+        changeErorMsg("All fileds are Required")
+    }else{
+      try{
+        const response=await Axios.post("http://localhost:3007/productDetails",{category,productName,couponCode,description,imageUrl})
+        if (response.data==='Error posting data'){
+          changeErorMsg("'Error posting data'")
+        }else{
+        changeErorMsg(response.data)
+        console.log(response.data)
+         setPhoto("")
+         changeCouponCode("")
+         setDescription("")
+         setProductName("")
+        setSubmitted(true);
+        }
+
+      }catch (e){
+        changeErorMsg("Error posting Data")
+      }
+    }
+    
+   
   };
 
   return (
@@ -36,6 +62,7 @@ const ReactPopup = () => {
           <div className="Popup-Container">
             <button className="Close-Button" onClick={() => {
               close();
+              changeErorMsg("")
               setSubmitted(false);
               return null;
             }}>Close</button>
@@ -50,7 +77,7 @@ const ReactPopup = () => {
                   <label htmlFor="categorySelect">Select Category:</label>
                   <select
                     id="categorySelect"
-                    value={selectedCategory}
+                    value={category}
                     onChange={handleCategoryChange}
                   >
                     {categoryList.map((category, index) => (
@@ -60,7 +87,7 @@ const ReactPopup = () => {
                     ))}
                   </select>
                 </div>
-                {selectedCategory === 'Other' ? (
+                {category === 'Other' ? (
                   <div>
                     <label htmlFor="otherSubcategory">Enter Other Category:</label>
                     <input
@@ -81,6 +108,17 @@ const ReactPopup = () => {
                   />
                 </div>
                 <div>
+                  <label htmlFor="couponcode">coupon Code:</label>
+                  <input
+                    id="couponcode"
+                    value={couponCode}
+                    onChange={(event) => changeCouponCode(event.target.value)}
+              
+                  />
+                </div>
+
+
+                <div>
                   <label htmlFor="description">Description:</label>
                   <textarea
                     id="description"
@@ -89,17 +127,23 @@ const ReactPopup = () => {
                     rows="4"
                   />
                 </div>
+
                 <div>
-                  <label htmlFor="photo">Upload Photo:</label>
+               { /*
+                <label htmlFor="photo">Upload Photo:</label> 
+               
                   <input
                     type="file"
                     id="photo"
                     accept="image/*"
                     onChange={(event) => setPhoto(event.target.files[0])}
-                  />
+                />  */}
+                   <label htmlFor="photo">Upload Photo:</label> 
+                <input type="url" id="photo" onChange={(event) => setPhoto(event.target.value) } />
                 </div>
                 <div>
                   <button type="submit" className="Submit-Button">Submit</button>
+                  {errorMsg.length>1? <p className="formErrorMsg">{errorMsg}</p>:null} 
                 </div>
               </form>
             )}
