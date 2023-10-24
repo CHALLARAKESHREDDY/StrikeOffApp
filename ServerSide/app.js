@@ -121,8 +121,10 @@ const productDetailsSchema = new mongoose.Schema({
     category: String,
     productName: String,
     couponCode:String,
+    expiresOn:Date,
     description: String,
     imageUrl: String,
+    username:String,
   });
   
   const productDetails = mongoose.model('productDetails', productDetailsSchema);
@@ -149,10 +151,13 @@ const productDetailsSchema = new mongoose.Schema({
 
 
 app.post('/productDetails', async (req, res) => {
-  const { category, productName,couponCode,description, imageUrl } = req.body;
-  console.log(category)
-
-  await productDetails.create({ category, productName,couponCode, description, imageUrl })
+  const { category, productName,couponCode,expiresOn,description, imageUrl,jwtTokenClient } = req.body;
+  jwt.verify(jwtTokenClient, "IAM_RAKESH", async (error, payload) => {
+    if (error) {
+      res.status(401).json({ error: 'Invalid Access Token' });
+    }else{
+    const username=payload.username
+    await productDetails.create({ category, productName,couponCode,expiresOn,description, imageUrl,username})
     .then(() => {
       res.status(200)
       
@@ -161,11 +166,23 @@ app.post('/productDetails', async (req, res) => {
     .catch((error) => {
       res.status(500);
       res.send('Error posting data')
-    });
+    })}})
 });
+
+
+//const jwt = require('jsonwebtoken'); // Make sure to import the 'jsonwebtoken' library
+ // Make sure to import the 'jsonwebtoken' library
 
 app.get('/cards', async (req, res) => {
   try {
+    const token = req.headers.authorization.split(' ')[1]; // Extract the token from the "Authorization" header
+    const payload = await jwt.verify(token, "IAM_RAKESH");
+    
+    if (!payload) {
+      res.status(401).json({ error: 'Invalid Access Token' });
+      return;
+    }
+
     const cards = await productDetails.find(); // Retrieve all documents from the "productDetails" collection
     res.status(200).json(cards);
   } catch (error) {

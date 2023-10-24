@@ -48,7 +48,7 @@ function LoginPage() {
         <br />
         <input  className="Login-Input" value={password} type="password" placeholder='Password' onChange={(event) => changePassword(event.target.value)} />
         <br /> 
-        <button type="button" onClick={onSubmitForm}>Login</button>
+        <button type="button" onClick={onSubmitForm} classNmae="Login-button">Login</button>
         <p>Don’t have an account? <span className="Signup-Text" onClick={changeRouteToSignupPage}>Sign Up</span></p>
         <p className="errorMsgLogin">{errorMsg}</p>
       </form>

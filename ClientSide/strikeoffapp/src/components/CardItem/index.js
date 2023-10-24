@@ -2,17 +2,18 @@ import "./index.css"
 
 function CardItem(props){
     const {item}=props
-    const {category,productName,couponCode,description,imageUrl}=item
+    const {category,productName,couponCode,description,imageUrl,expiresOn,username}=item
     console.log(category)
     return(
   
 <div className="Cards">
 <div><img className="Card-Image" src={imageUrl} alt="shopping-img"/></div>
 <div className="Description-Container">
-    <p className="card-para">{category}</p>
-    <p className="card-para">{productName}</p>
-    <p className="card-para">{couponCode}</p>
-    <p className="card-para">{description}</p>
+    <div className="Cards-Elements"><p className="card-para">Category : {category}</p>
+   <p className="card-para">Product/Platform : {productName}</p></div>
+   <div className="Cards-Elements"><p className="card-para">Coupon Code : {couponCode}</p> <p>{expiresOn}</p> </div>
+    <p className="card-para">Details : {description}</p>
+    <p>Posted By:{username}</p>
 </div>
 </div>
 

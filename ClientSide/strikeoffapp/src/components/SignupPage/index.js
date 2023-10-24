@@ -70,7 +70,7 @@ function SignupPage(){
                     <br />
                 <input className="Login-Input" value={password} type="password" placeholder='Password' onChange={(event)=>changePassword(event.target.value)}/>
                 <br/>
-                <button type="button" onClick={handleSubmit}>Signup</button>
+                <button type="button" onClick={handleSubmit} className="Signup-button">Signup</button>
                 <p>Already have an account? <span className="Login-Text" onClick={changeRouteToLoginPage}>Log In</span> </p>
                 {errorMsg.length>1? <p className="errorMsg">{errorMsg}</p>:null} 
             </form>

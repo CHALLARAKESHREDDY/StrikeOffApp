@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 import  Axios from 'axios';
 import Popup from 'reactjs-popup';
 import './index.css';
@@ -11,6 +12,7 @@ const ReactPopup = () => {
   const [productName, setProductName] = useState('');
   const [couponCode,changeCouponCode] = useState("")
   const [description, setDescription] = useState('');
+  const [expiresOn,setExpiredDate]=useState("");
   const [imageUrl, setPhoto] = useState("");
   const [errorMsg,changeErorMsg]=useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -23,13 +25,14 @@ const ReactPopup = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     
-    if (!productName || !description || !imageUrl || !couponCode){
+    if (!productName || !description || !imageUrl || !couponCode || ! expiresOn){
         changeErorMsg("All fileds are Required")
     }else{
       try{
-        const response=await Axios.post("http://localhost:3007/productDetails",{category,productName,couponCode,description,imageUrl})
-        if (response.data==='Error posting data'){
-          changeErorMsg("'Error posting data'")
+           const jwtTokenClient=await Cookies.get("jwtToken")
+        const response=await Axios.post("http://localhost:3007/productDetails",{category,productName,couponCode,expiresOn,description,imageUrl,jwtTokenClient})
+        if (response.data!=='Data posted successfully'){
+          changeErorMsg(response.data)
         }else{
         changeErorMsg(response.data)
         console.log(response.data)
@@ -116,6 +119,15 @@ const ReactPopup = () => {
               
                   />
                 </div>
+                <div>
+                  <label htmlFor="expireDate">Expries On:</label>
+                  <input
+                    id="expireDate"
+                    value={expiresOn}
+                    onChange={(event) => setExpiredDate(event.target.value)}
+                   type="date"
+                  />
+                </div>
 
 
                 <div>
@@ -124,7 +136,7 @@ const ReactPopup = () => {
                     id="description"
                     value={description}
                     onChange={(event) => setDescription(event.target.value)}
-                    rows="4"
+                  
                   />
                 </div>
 

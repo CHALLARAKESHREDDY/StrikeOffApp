@@ -33,12 +33,6 @@ body {
     cursor: pointer;
   }
   
-  .errorMsgLogin {
-    color: red;
-    margin: 7px;
-    width: 100%;
-  }
-
 
   .Login-Input{
     width: 70%;
@@ -50,7 +44,7 @@ body {
   }
   
   /* Style for the login button */
-  button {
+  .Login-button {
     width: 40%;
     padding: 10px;
     background-color: #4CAF50; /* Green color (you can change this) */

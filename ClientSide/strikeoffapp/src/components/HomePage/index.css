@@ -39,7 +39,7 @@
 
 .Cards-Container{
     width:90%;
-    height:100vh;
+  
     display:flex;
     flex-direction: column;
     justify-content: space-around;
@@ -118,3 +118,21 @@
     font-size: 20px;
     margin:5px;
 }
+
+
+
+#scrollable-container-content {
+    max-height: 100%; /* Ensure the content doesn't overflow */
+    overflow-y: scroll; /* Enable vertical scrolling */
+    padding-top: 70px; /* Add padding for the scrollbar width */
+    overflow-x: hidden;
+   
+  }
+  
+  /* Style for WebKit-based browsers (Chrome, Safari) */
+  #scrollable-container-content::-webkit-scrollbar {
+    width: 0.5em; /* Set the width of the scrollbar */
+  }
+  
+ 
+ 

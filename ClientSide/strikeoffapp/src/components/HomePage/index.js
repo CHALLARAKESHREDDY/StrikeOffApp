@@ -25,7 +25,12 @@ class HomePage extends Component{
 
     getDataFromDb=async()=>{
         try{
-        const response=await Axios.get('http://localhost:3007/cards/')
+        const jwtTokenClient=await Cookies.get("jwtToken")
+        const response = await Axios.get('http://localhost:3007/cards', {
+            headers: {
+              Authorization: `Bearer ${jwtTokenClient}`,
+            },
+          });
         this.setState({cardsItems:response.data,isLoading:false})
              
         }catch (e){
@@ -77,9 +82,9 @@ class HomePage extends Component{
                    <div className="Search-Container">
                     <input type="text" className="Input-Home" placeholder="Search for Items"/>
                  
-                    <ReactPopup />
+                    <ReactPopup  />
                    </div>
-                <div className="Cards-Container">
+                <div className="Cards-Container" id="scrollable-container-content" >
                      {isLoading?
                      <p>Loading...</p>:cardsItems.map(item=>(<CardItem item={item} key={item.id}/>))
                      }
