@@ -1,5 +1,6 @@
 const express = require('express');
 const jwt= require('jsonwebtoken')
+const nodemailer = require("nodemailer");
 const app = express();
 app.use(express.json());
 
@@ -74,7 +75,57 @@ app.post('/tasks', async (req, res) => {
 
     
       else{
-        await Task.create({ username, password, emailAddress })
+      
+
+    
+
+// Create a transporter object using SMTP transport
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port:587,
+  secure:false,
+  requireTLS:true,
+  auth: {
+    user: "rakeshreddynanim30@gmail.com",
+    pass: "vglq sung exaj lird",
+  }, tls: {
+    rejectUnauthorized: false,
+  }
+   
+});
+
+
+// Generate a random OTP (e.g., 6 digits)
+const generateOTP = () => {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+};
+
+// Email OTP to the user
+const sendOTP = (toEmail) => {
+  const generatedOTP = generateOTP();
+  const mailOptions = {
+    from: "rakeshreddynanim30@gmail.com",
+    to:toEmail,
+    subject: " Your OTP for Email Verification",
+    text: `hello i am rakesh give me your otp Your OTP is: ${generatedOTP}`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error("Error sending email: " + error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+};
+
+// Usage
+ // Replace with the user's email
+sendOTP(emailAddress);
+
+res.send("OTP Sent to you registered email id")
+
+        /* await Task.create({ username, password, emailAddress })
       .then((task) => {
            res.status(200)
          
@@ -82,7 +133,8 @@ app.post('/tasks', async (req, res) => {
       })
       .catch((error) => {
           res.status(500).json({ error: 'Error creating task' });
-      }); }
+      });*/
+     } 
 
     } catch (error) {
       res.status(500).json({ error: 'Error creating user' });
@@ -189,3 +241,19 @@ app.get('/cards', async (req, res) => {
     res.status(500).json({ error: 'Error fetching cards' });
   }
 });
+
+
+
+
+
+
+
+
+app.post("/verify-otp",async(req,res)=>{
+  const {otp}=req.body
+  if (otp==generateOTP){
+    res.send("success")
+  }else{
+    res.send("failed")
+  }
+})
