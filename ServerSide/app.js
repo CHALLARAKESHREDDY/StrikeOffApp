@@ -36,6 +36,12 @@ const connection = async () => {
 
 connection()
 
+let globalOTP = '';
+
+let userName=""
+let passWord=""
+let EmailAddress=""
+
 const taskSchema = new mongoose.Schema({
   username: String,
   password: String,
@@ -45,103 +51,101 @@ const taskSchema = new mongoose.Schema({
 const Task = mongoose.model('Task', taskSchema);
 
 
+// Declare globalOTP at the top of your file
+
 
 app.post('/tasks', async (req, res) => {
   const { username, password, emailAddress } = req.body;
-  
+  userName = username;
+  passWord = password;
+  EmailAddress = emailAddress;
 
   try {
-      const existingUser = await Task.findOne({ $or: [{ username }, { emailAddress }] }).exec();
+    const existingUser = await Task.findOne({ $or: [{ username }, { emailAddress }] }).exec();
 
-      if (existingUser) {
-          const errors = {};
+    if (existingUser) {
+      const errors = {};
 
-          if (existingUser.username === username) {
-              errors.username = 'Username already exists';
-            
-              res.send("Username already exists")
-              return res.status(409)
-          }
+      if (existingUser.username === username) {
+        errors.username = 'Username already exists';
 
-          if (existingUser.emailAddress === emailAddress) {
-              errors.emailAddress = 'Email already exists';
-           
-              res.send("Email Already exits")
-              return res.status(407)
-          }
-
-         
+        res.send("Username already exists");
+      
+        return;
       }
 
-    
-      else{
-      
+      if (existingUser.emailAddress === emailAddress) {
+        errors.emailAddress = 'Email already exists';
 
-    
+        res.send("Email Already exits");
+        return;
+      }
+    } else {
+      // Create a transporter object using SMTP transport
+      const transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false,
+        requireTLS: true,
+        auth: {
+          user: "rakeshreddynanim30@gmail.com",
+          pass: "vglq sung exaj lird",
+        },
+        tls: {
+          rejectUnauthorized: false,
+        }
+      });
 
-// Create a transporter object using SMTP transport
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port:587,
-  secure:false,
-  requireTLS:true,
-  auth: {
-    user: "rakeshreddynanim30@gmail.com",
-    pass: "vglq sung exaj lird",
-  }, tls: {
-    rejectUnauthorized: false,
+      // Generate a random OTP (e.g., 6 digits)
+      const generateOTP = () => {
+        return Math.floor(100000 + Math.random() * 900000).toString();
+      };
+
+      // Email OTP to the user
+      const generatedOTP = generateOTP();
+      globalOTP = generatedOTP;
+
+      const mailOptions = {
+        from: "rakeshreddynanim30@gmail.com",
+        to: emailAddress,
+        subject: "Your OTP for Email Verification",
+        text: `Hello, I am Rakesh. Please provide your OTP. Your OTP is: ${generatedOTP}`,
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.error("Error sending email: " + error);
+        } else {
+          console.log("Email sent: " + info.response);
+        }
+      });
+
+      res.send("OTP Sent to your registered email id");
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Error creating user' });
   }
-   
 });
 
-
-// Generate a random OTP (e.g., 6 digits)
-const generateOTP = () => {
-  return Math.floor(100000 + Math.random() * 900000).toString();
-};
-
-// Email OTP to the user
-const sendOTP = (toEmail) => {
-  const generatedOTP = generateOTP();
-  const mailOptions = {
-    from: "rakeshreddynanim30@gmail.com",
-    to:toEmail,
-    subject: " Your OTP for Email Verification",
-    text: `hello i am rakesh give me your otp Your OTP is: ${generatedOTP}`,
-  };
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error("Error sending email: " + error);
-    } else {
-      console.log("Email sent: " + info.response);
-    }
-  });
-};
-
-// Usage
- // Replace with the user's email
-sendOTP(emailAddress);
-
-res.send("OTP Sent to you registered email id")
-
-        /* await Task.create({ username, password, emailAddress })
-      .then((task) => {
-           res.status(200)
-         
-          res.send("User registered successfully!")
-      })
-      .catch((error) => {
-          res.status(500).json({ error: 'Error creating task' });
-      });*/
-     } 
-
+app.post('/verify-otp', async (req, res) => {
+  const { otp } = req.body;
+  console.log(userName)
+  console.log(otp)
+  console.log(globalOTP)
+  if (otp === globalOTP) {
+    // OTP is correct, so proceed to create the user
+    try {
+      await Task.create({ username:userName, password:passWord, emailAddress:EmailAddress });
+      res.status(200).send("User registered successfully!");
     } catch (error) {
       res.status(500).json({ error: 'Error creating user' });
-      res.send( {error: 'Error creating user' })
+    }
+  } else {
+    // OTP is incorrect
+    res.send("OTP verification failed");
   }
-     
 });
+
 
 
 app.post('/login',async(req,res)=>{
@@ -249,11 +253,21 @@ app.get('/cards', async (req, res) => {
 
 
 
-app.post("/verify-otp",async(req,res)=>{
+/*app.post("/verify-otp",async(req,res)=>{
   const {otp}=req.body
-  if (otp==generateOTP){
+  if (otp===globalOTP){
+    
+       // OTP is correct, so proceed to create the user
+    try {
+      await Task.create({ userName, passWord, EmailAddress });
+      res.status(200).send("User registered successfully!");
+    } catch (error) {
+      res.status(500).json({ error: 'Error creating user' });
+    }
     res.send("success")
   }else{
     res.send("failed")
   }
 })
+*/
+

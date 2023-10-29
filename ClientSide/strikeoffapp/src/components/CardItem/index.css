@@ -1,37 +1,56 @@
-.Cards{
-    width:97%;
-    height:200px;
-    /*background: linear-gradient(to right, rgba(231, 212, 212, 0.2) 0%, rgba(231, 212, 212, 0.2) 40%); */
+.Cards {
+    width: 95%;
+    height: 180px;
     background-color: rgba(255, 255, 255, 0.2);
-    border-radius:20px;
-    display:flex;
+    border-radius: 20px;
+    display: flex;
     align-items: center;
-    justify-content: space-around;
-    margin:12px;
+    justify-content: space-between; /* Space between elements */
+    margin: 12px;
+    padding: 10px; /* Add padding for spacing */
+  }
+  
+  .image-Container {
+    width: 25%;
+  }
+  
+  .Card-Image {
+    width: 90%;
+    height: 170px;
+    border-radius: 15px;
+    margin: 20px;
+  }
+  
+  .Description-Container {
+    width: 70%; /* Adjust width */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space between elements */
+    align-items: flex-start;
+  }
+  
+  .card-para {
+    color: #ffffff;
+    margin: 5px 0;
+  }
+
+.sameline-elements{
+    display:flex;
     
 }
 
-.Card-Image{
-    width: 100%;
-    height:170px;
-    border-radius: 15px;
-    margin:20px;
-}
+.Details-Container {
+    max-height: 150px; /* Limit the maximum height of the details */
+  /* Add a scroll bar when content exceeds the max height */
+    padding-right: 10px; /* Create space for the scrollbar */
+ 
+  }
 
-.Description-Container{
-    width:75%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.card-para{
-    color:rgb(218, 33, 33);
-}
-
-
-.Cards-Elements{
-    display:flex;
-    justify-content: space-around;
-}
+  #Expire-Date{
+    margin-left:60px;
+  }
+  
+  /* Add any o
+  
+  /* Add any other CSS styles you need */
+  

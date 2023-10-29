@@ -49,9 +49,11 @@ function SignupPage(){
       
         try {
             const response = await Axios.post('http://localhost:3007/tasks', {username:username, password: password,emailAddress:emailAddress});
-
-            if (response.data==="OTP Sent to you registered email id"){
+          
+            if (response.data==="OTP Sent to your registered email id"){
                  changeRouteToOTPPage()
+                 changeErrormsg(response.data)
+
                
             }else{
               changeErrormsg(response.data)

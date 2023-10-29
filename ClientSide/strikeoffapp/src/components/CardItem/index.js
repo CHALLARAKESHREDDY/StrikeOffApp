@@ -3,17 +3,18 @@ import "./index.css"
 function CardItem(props){
     const {item}=props
     const {category,productName,couponCode,description,imageUrl,expiresOn,username}=item
-    console.log(category)
+    const expiresDate = new Date(expiresOn);
+    
     return(
   
 <div className="Cards">
-<div><img className="Card-Image" src={imageUrl} alt="shopping-img"/></div>
+<div className="image-Container"><img className="Card-Image" src={imageUrl} alt="shopping-img"/></div>
 <div className="Description-Container">
-    <div className="Cards-Elements"><p className="card-para">Category : {category}</p>
-   <p className="card-para">Product/Platform : {productName}</p></div>
-   <div className="Cards-Elements"><p className="card-para">Coupon Code : {couponCode}</p> <p>{expiresOn}</p> </div>
+   
+   <p className="card-para">{productName}</p>
+   <div className="sameline-elements"><p className="card-para">Coupon Code : {couponCode}</p><p className="card-para" id="Expire-Date">Expries On : {expiresDate.toLocaleDateString()}</p></div>
     <p className="card-para">Details : {description}</p>
-    <p>Posted By:{username}</p>
+    <div className="sameline-elements"><p className="card-para">Category : {category}</p><p className="card-para" id="Expire-Date">Posted By : {username}</p></div>
 </div>
 </div>
 
