@@ -1,38 +1,19 @@
 
-import { useNavigate } from 'react-router-dom'
+import Header from '../LandingPageHeader'
 import './index.css'
 
 function LandingPage(){
 
-    const history=useNavigate()
 
-    const changeRouteToLogin=()=>{
-        
-        history('/login')
-    }
-
-    const changeRouteToSignup=()=>{
-        history('./signup')
-    }
 
     return(
         <div className="Landingpage-Container">
-            <div className="Landingpage-Sub-Container">
-                <div><h1 className="Strikeout-Logo">STRIKEOUT</h1></div>
-                <div className="Home-About-Container">
-                    <p className="Home-Heading">Home</p>
-                    <p  className="App-Heading">About</p>
-                </div>
-                <div className="Login-Singup-Buttons">
-                    <button className="Login-Button" onClick={changeRouteToLogin}>Login</button>
-                    <button className="Singup-Button" onClick={changeRouteToSignup}>Signup</button>
-                </div>
-            </div>
+       <Header />
             <div className="Quote-Image-Container">
                 <div>
-                    <h1 className="Quote">OPENING VERY <br/> SOON</h1>
+                    <h1 className="Quote">Your Coupons,<br />Your Savings,<br/> Your Way.</h1>
                 </div>
-                <img  className="Landing-Image" src="https://img.freepik.com/free-photo/view-3d-woman-using-laptop_23-2150710060.jpg?t=st=1697581551~exp=1697585151~hmac=3dd046fc330b6290e80624729c72fcc1e725e332c18f67a3ed0e4f7dd15fab6a&w=740" alt="Landing-image" />
+                <img  className="Landing-Image" src="https://img.freepik.com/free-vector/modern-coupon-sale-label-collection-with-flat-design_23-2147950121.jpg?w=740&t=st=1698747587~exp=1698748187~hmac=3be02a8aeeaea7d2a9fe8341e548e4cbe756966e8e751853c6f77c3d42b4901d" alt="Landing-image" />
             </div>
 
         </div>
