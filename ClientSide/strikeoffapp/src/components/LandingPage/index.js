@@ -8,7 +8,7 @@ function LandingPage(){
 
     return(
         <div className="Landingpage-Container">
-       <Header />
+       <Header id="header"/>
             <div className="Quote-Image-Container">
                 <div>
                     <h1 className="Quote">Your Coupons,<br />Your Savings,<br/> Your Way.</h1>

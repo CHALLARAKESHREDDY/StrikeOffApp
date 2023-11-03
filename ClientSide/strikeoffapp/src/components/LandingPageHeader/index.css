@@ -162,6 +162,7 @@
     
     
     
+    
     .Strikeout-Logo{
         font-size: 18px;
         font-weight: 300;
@@ -216,4 +217,257 @@
         
 
     }
-    
+
+
+    /* GOOGLE FONTS */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,700");
+
+/* CSS RESET */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  font-family: "Montserrat", serif;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+button,
+.btn {
+  font-family: inherit;
+}
+
+/* CSS RESET ENDS */
+
+/* NAVIGATION BAR */
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  padding: 0.75rem 5vw;
+  box-shadow: 0 0 30px lightgray;
+  color:white;
+  height:100px;
+  width:100%;
+}
+
+nav span {
+  color: #4caf50;
+}
+
+nav p {
+  font-size: 25px;
+  font-weight: 600;
+  cursor: default;
+}
+
+nav li {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+nav a {
+  text-decoration: none;
+  color: #676767;
+  padding: 0 1rem;
+  transition: 0.1s ease-in-out;
+  font-size: 20px;
+}
+nav a:hover {
+  color: #121212;
+}
+
+nav .btn {
+  padding: 0.5rem 1rem;
+  margin: 0 0 0 0.5rem;
+  border: 1px solid;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease-in-out; 
+  font-size: 16px;
+}
+
+.register {
+  
+    border:2px solid #4F51C0;
+    background-color: transparent;
+    border-color: #4F51C0;
+ 
+  border-radius: 5px;
+}
+
+.register:hover {
+  background-color: #3c8c40;
+}
+
+.login {
+  background-color: white;
+  color: #4caf50;
+}
+
+.login:hover {
+  background-color: #4caf50;
+  color: white;
+  border: 1px solid #4caf50;
+  border-radius: 5px;
+}
+
+/* NAVIGATION BAR ENDS */
+
+
+/* MEDIA QUERIES - RESPONSIVE LAYOUT */
+
+/* DESKTOP - LAPTOP - TABLET */
+@media screen and (min-width: 850px){
+  nav .small-screens {
+    display: none;
+  }
+}
+
+/* MOBILE */
+@media screen and (max-width: 850px){
+  nav{
+    padding: 1rem 5vw;
+  }
+  
+  nav .small-screens i{
+    font-size: 25px;
+    cursor: pointer;
+  }
+  
+  nav .big-screens {
+    display: none;
+  }
+}
+
+
+/* Add this CSS for the dropdown menu */
+nav .dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%; /* Position the dropdown below the HiMenu */
+    background-color: white;
+    box-shadow: 0 0 30px lightgray;
+    z-index: 1;
+  }
+  
+  nav .dropdown-menu a {
+    color: #676767;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+  }
+  
+  nav .dropdown-menu button {
+    color: white;
+    background-color: #4caf50;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    cursor: pointer;
+  }
+  
+  /* Update your media queries */
+  /* DESKTOP - LAPTOP - TABLET */
+ /* Navbar.css */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 2rem;
+  }
+  
+  .navbar-logo {
+    font-size: 1.5rem;
+  }
+  
+  .navbar-links {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 40%;
+  }
+  
+  .navbar-links.active {
+    display: flex;
+  }
+  
+  .navbar-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+  
+  .menu-icon {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  
+  .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 3px 0;
+    transition: 0.4s;
+  }
+  
+  .change.bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+  
+  .change.bar:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .change.bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+  
+  @media screen and (max-width: 768px) {
+    .menu-icon {
+      display: flex;
+    }
+  
+    .navbar-links {
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background-color: #333;
+      width: 100%;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-in;
+    }
+  
+    .navbar-links.active {
+      max-height: 400px;
+    }
+  }
+  
+

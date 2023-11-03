@@ -157,8 +157,9 @@ app.post('/login',async(req,res)=>{
     try{
         const existingUser = await Task.findOne({ $and: [{ username }, { password }] }).exec();
         
+        
         if (existingUser!==null){
-            let resultObject={jwtToken:jwtToken,resultMsg:"Login Successfull"}
+            let resultObject={jwtToken:jwtToken,resultMsg:"Login Successfull",details:{username:existingUser.username,password:existingUser.password.length,emailAddress:existingUser.emailAddress}}
             res.send(resultObject)
         }else{
             res.send("User NotFound")

@@ -74,22 +74,31 @@ function SignupPage(){
 
 
     return(
-        <div className="Signuppage-Container">
-            <form className="signup-Form"  >
-                <h1>Create Account</h1>
-                <input className="Login-Input" value={emailAddress} type="email" placeholder='Email Adsress' onChange={(event)=>changeEmailAddress(event.target.value)} />
-                <br />
-                <input  className="Login-Input" value={username} type="username" placeholder='Username' onChange={(event)=>changeUsername(event.target.value)} />
-                    <br />
-                <input className="Login-Input" value={password} type="password" placeholder='Password' onChange={(event)=>changePassword(event.target.value)}/>
-                <br/>
-                <button type="button" onClick={handleSubmit} className="Signup-button">Signup</button>
-                <p>Already have an account? <span className="Login-Text" onClick={changeRouteToLoginPage}>Log In</span> </p>
-                {errorMsg.length>1? <p className="errorMsg">{errorMsg}</p>:null} 
-            </form>
-          
-        </div>
+      <div className="container">
+         
+<div className="card">
+  <div className="card_title">
+    <h1>Create Account</h1>
+    <span style={{fontSize:"10px"}}>Already have an account? <a onClick={changeRouteToLoginPage} style={{cursor:"pointer",color:"#0f3460",fontWeight:"500"}}>SignIn</a></span>
+  </div>
+  <div className="form">
+  <form action="/register" method="post">
+    <input type="text" name="username" id="username" placeholder="UserName" value={username}  onChange={(event)=>changeUsername(event.target.value)} />
+    <input  value={emailAddress} type="email" placeholder='Email Address' onChange={(event)=>changeEmailAddress(event.target.value)} id="email" />
+    <input type="password" name="password" placeholder="Password" id="password"  value={password}  onChange={(event)=>changePassword(event.target.value)} />
+    <button type="button" onClick={handleSubmit} >Sign Up</button>
+    </form>
+     
+  </div>
+  <div className="card_terms">
+  {errorMsg.length>1? <p className="errorMsg">{errorMsg}</p>:null} 
+  </div>
+</div>
+</div>
+ 
     )
 }
 
 export default SignupPage
+
+

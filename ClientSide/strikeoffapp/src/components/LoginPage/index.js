@@ -23,6 +23,7 @@ function LoginPage() {
         username: emailAddress,
         password: password,
       });
+      console.log(response.data)
 
       if (response.data.resultMsg === 'Login Successfull') {
         await Cookies.set('jwtToken', response.data.jwtToken, { expires: 3 });
@@ -41,19 +42,32 @@ function LoginPage() {
   }
 
   return (
-    <div className="Loginpage-Container">
-      <form className="Login-Form">
-        <h1>Welcome Back!</h1>
-        <input className="Login-Input" value={emailAddress} type="text" placeholder='Username' onChange={(event) => changeEmailAddress(event.target.value)} />
-        <br />
-        <input  className="Login-Input" value={password} type="password" placeholder='Password' onChange={(event) => changePassword(event.target.value)} />
-        <br /> 
-        <button type="button" onClick={onSubmitForm} classNmae="Login-button">Login</button>
-        <p>Don’t have an account? <span className="Signup-Text" onClick={changeRouteToSignupPage}>Sign Up</span></p>
-        <p className="errorMsgLogin">{errorMsg}</p>
-      </form>
+    <section className="container">
+    <div className="login-container">
+        <div className="circle circle-one"></div>
+        <div className="form-container">
+          
+            <h1 className="opacity">LOGIN</h1>
+            <form>
+                <input value={emailAddress} type="text" placeholder='Username' onChange={(event) => changeEmailAddress(event.target.value)}/>
+                <input  value={password} type="password" placeholder='Password' onChange={(event) => changePassword(event.target.value)}/>
+                <button className="opacity" onClick={onSubmitForm}>SUBMIT</button>
+            </form>
+            <div className="register-forget opacity">
+                <a onClick={changeRouteToSignupPage} style={{cursor:"pointer"}}>SIGNUP</a>
+                <a className="Signup">FORGOT PASSWORD</a>
+            </div>
+            <p className="errorMsgLogin">{errorMsg}</p>
+        </div>
+       
+        <div className="circle circle-two"></div>
     </div>
+    <div className="theme-btn-container"></div>
+    </section>
   );
 }
 
 export default LoginPage;
+
+
+

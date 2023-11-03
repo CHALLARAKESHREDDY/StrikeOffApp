@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+/*import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import AiOutlineMenu from 'react-icons/ai'
 import { useState } from 'react';
@@ -104,3 +104,65 @@ function Header() {
 }
 
 export default Header;
+
+
+*/
+
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import {Link} from 'react-router-dom'
+import {AiFillHome} from 'react-icons/ai'
+import {BsFillBriefcaseFill} from 'react-icons/bs'
+import {HiMenu} from 'react-icons/hi'
+import {FiLogOut} from 'react-icons/fi'
+import Cookies from 'js-cookie'
+
+import './index.css'
+
+const Header = props => {
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const history = useNavigate();
+   
+
+    const changeRouteToLogin = () => {
+        history('/login');
+    };
+
+    const changeRouteToSignup = () => {
+        history('/signup');
+    };
+
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+  const onClickLogout = () => {
+    Cookies.remove('jwt_token')
+    const {history} = props
+    history.replace('/login')
+  }
+  return (
+    <nav className="flex align-center">
+    <p><span>Strike</span>Out</p>
+    <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
+    
+        <Link to="/" ><a style={{alignSelf:"center"}}>Home</a></Link>
+        <Link to="/landingAbout"><a style={{alignSelf:"center"}}>About</a></Link>
+
+       
+                <a onClick={changeRouteToLogin}>Login</a>
+                <a onClick={changeRouteToSignup} >Signup</a>
+        
+      </div>
+      <div className="menu-icon" onClick={toggleMenu}>
+        <div className={`bar ${isMenuOpen ? 'change' : ''}`}></div>
+        <div className={`bar ${isMenuOpen ? 'change' : ''}`}></div>
+        <div className={`bar ${isMenuOpen ? 'change' : ''}`}></div>
+      </div>
+  </nav>
+  )
+}
+
+export default Header

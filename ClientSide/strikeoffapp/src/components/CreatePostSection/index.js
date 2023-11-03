@@ -41,6 +41,7 @@ const ReactPopup = () => {
          setDescription("")
          setProductName("")
         setSubmitted(true);
+        window.location.reload();
         }
 
       }catch (e){

@@ -1,14 +1,13 @@
 .body{
     box-sizing: border-box;
 }
-.Home-Container{
-    height:100vh;
-    width:100%;
-    background-color: #0D042A;
-    display:flex;
-    justify-content: flex-start;
-    color:#ffffff;
-    box-sizing: border-box;
+.Home-Container {
+   display:flex;
+   background-color: rgba(13, 4, 42, 1)
+   ;
+ 
+  
+   
 }
 
 .Side-Bar{
@@ -26,6 +25,13 @@
     padding-bottom:40px;
     box-sizing: border-box;
     border: 1px solid #2E1C67;
+    position: fixed;
+    flex:1;
+   
+            
+          
+            position: fixed;
+            height: 100%;
    
 }
 
@@ -38,13 +44,14 @@
 }
 
 .Cards-Container{
-    width:90%;
-  
-    display:flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-self: center;
-    text-align: center;
+   
+
+
+    flex: 3;
+            overflow-y: scroll;
+           
+           text-align:  center;
+         align-self: center;
 }
 
 
@@ -76,10 +83,12 @@
 
 .Cards-Main-Container{
     height:100vh;
-    width:70%;
+    width:85%;
     display:flex;
     flex-direction: column;
-    justify-content:flex-end ;
+    justify-content: center;
+    align-items: center;
+   
 }
 
 .Right-Bar{
@@ -89,20 +98,40 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-left:1px solid #2E1C67;;
-}
-
-.Search-Container{
-    height:20%;
-    width:100%;
-    display:flex;
-    justify-content:center;
-    align-items: center;
+    border-left:1px solid #2E1C67;
+    flex: 1;
+            
+            color: #fff;
+            padding: 20px;
+            position: fixed;
+            height: 100%;
+            right: 0;
     
-
 }
+/* Add the following styles to your existing CSS file or component */
 
-.Input-Home{
+/* Style for the search container */
+.Search-Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:transparent;
+    align-self: center;
+    padding: 10px;
+    width:100%;
+    height:100px;
+    margin:20px 5px;
+  }
+  
+  /* Style for the input element */
+  #Input-Home {
+    width: 60%;
+    height:90px;
+    /* Add any additional styles for the input element */
+  }
+  
+
+#Input-Home{
     width:45%;
     height:30px;
     background-color: #FFFFFF;
@@ -121,13 +150,6 @@
 
 
 
-#scrollable-container-content {
-    max-height: 100%; /* Ensure the content doesn't overflow */
-    overflow-y: scroll; /* Enable vertical scrolling */
-    padding-top: 70px; /* Add padding for the scrollbar width */
-    overflow-x: hidden;
-   
-  }
   
   /* Style for WebKit-based browsers (Chrome, Safari) */
   #scrollable-container-content::-webkit-scrollbar {
@@ -135,4 +157,28 @@
   }
   
  
- 
+  .react-Icons.selected {
+   color:#ffffff;
+    
+  }
+
+  .Middle-Container{
+    height:100vh;
+    width:80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .MyAccount-Container{
+
+    background-color: rgba(255, 255, 255, 0.2);
+    width:30%;
+    height:350px;
+    border-radius: 25px;
+    border:2px solid #ffffff;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
