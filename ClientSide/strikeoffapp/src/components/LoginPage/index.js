@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState,useContext} from 'react';
+import { useNavigate,} from 'react-router-dom';
+import DataContext from '../../Context';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import './index.css';
@@ -8,6 +9,7 @@ function LoginPage() {
   const [emailAddress, changeEmailAddress] = useState('');
   const [password, changePassword] = useState('');
   const [errorMsg, changeErrormsg] = useState(null);
+  const {setUserDetails}=useContext(DataContext)
   const history = useNavigate();
 
   const onSubmitForm = async (event) => {
@@ -23,9 +25,11 @@ function LoginPage() {
         username: emailAddress,
         password: password,
       });
-      console.log(response.data)
+      
 
       if (response.data.resultMsg === 'Login Successfull') {
+        Cookies.set('userDetails', JSON.stringify(response.data.details));
+        console.log(response.data.details)
         await Cookies.set('jwtToken', response.data.jwtToken, { expires: 3 });
         await changeErrormsg('Your JWT has been set! Now you can start Saving');
         await history('/home');
