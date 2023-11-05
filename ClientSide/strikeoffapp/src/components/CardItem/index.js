@@ -1,22 +1,28 @@
+import {BsChatSquareDots} from 'react-icons/bs'
 import "./index.css"
 
 function CardItem(props){
-    const {item}=props
+    const {item,clickedOnChatIcon,id}=props
     const {category,productName,couponCode,description,imageUrl,expiresOn,username}=item
     const expiresDate = new Date(expiresOn);
+
+    const chatIconClick=(username)=>{
+       
+        clickedOnChatIcon(username)
+    }
     
     return(
   
-<div className="Cards">
+<li className="Cards">
 <div className="image-Container"><img className="Card-Image" src={imageUrl} alt="shopping-img"/></div>
 <div className="Description-Container">
    
    <p className="card-para">{productName}</p>
    <div className="sameline-elements"><p className="card-para">Coupon Code : {couponCode}</p><p className="card-para" id="Expire-Date">Expries On : {expiresDate.toLocaleDateString()}</p></div>
     <p className="card-para">Details : {description}</p>
-    <div className="sameline-elements"><p className="card-para">Category : {category}</p><p className="card-para" id="Expire-Date">Posted By : {username}</p></div>
+    <div className="sameline-elements"><p className="card-para">Category : {category}</p><p className="card-para" id="Expire-Date">Posted By : {username}</p> <BsChatSquareDots className="Chat-Icon"  style={{fontSize:"20px",color:"skyblue"}}  onClick={() => chatIconClick(username)}  /></div>
 </div>
-</div>
+</li>
 
         
     )
