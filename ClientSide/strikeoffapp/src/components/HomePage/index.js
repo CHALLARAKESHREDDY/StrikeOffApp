@@ -1,12 +1,9 @@
-// HomePage.js
-
 import React, { useContext, useState, useEffect, useCallback } from "react";
 import Cookies from "js-cookie";
 import { v4 } from "uuid";
 import Axios from "axios";
 import { Navigate } from "react-router-dom";
 import { HiOutlineLogout } from "react-icons/hi";
-import DataContext from "../../Context";
 import { FaBriefcase } from 'react-icons/fa';
 import { BiSolidMessageDots } from 'react-icons/bi';
 import { MdAccountBox } from 'react-icons/md';
@@ -22,10 +19,8 @@ function HomePage() {
     const [isLoading, setIsLoading] = useState(true);
     const [selectedIcon, setSelectedIcon] = useState("home");
     const [usernameChat, setUsernameChat] = useState("");
-    const [filterOptions, setFilter] = useState("Clothing");
-    const [searchInput,setSearchInput]=useState("")
-    
-    
+    const [filterOptions, setFilter] = useState("");
+    const [searchInput, setSearchInput] = useState("");
 
     const clickedOnChatIcon = (username) => {
         handleIconClick("message");
@@ -51,7 +46,12 @@ function HomePage() {
         }
     }, []);
 
-    console.log(searchInput)
+
+    const updateCardsItems = () => {
+        // This function will be called to refresh the cardsItems state
+        getDataFromDb();
+      };
+    
 
     const navigateToSomePage = useCallback((navigate) => {
         Cookies.remove("jwtToken");
@@ -61,20 +61,21 @@ function HomePage() {
 
     const handleIconClick = useCallback((icon) => {
         setSelectedIcon(icon);
-        console.log("clicked");
     }, []);
 
     const cardsFunction = useCallback(() => {
-        const filteredSearchItems=cardsItems.filter((item)=>{
-            return item.productName.toLowerCase().includes(searchInput.toLowerCase())
-        })
-        const filteredItems=filteredSearchItems.filter((item)=>{
-            return item.category===filterOptions;
-        })
+        const filteredItems = cardsItems.filter((item) => {
+            const productNameLower = item.productName.toLowerCase();
+            return (
+                productNameLower.includes(searchInput.toLowerCase()) &&
+                (filterOptions === "" || item.category === filterOptions)
+            );
+        });
+
         return (
             <div className="Cards-Main-Container">
                 <div className="Search-Container">
-                    <input type="text" id="Input-Home" onChange={(event)=>setSearchInput(event.target.value)} placeholder="Search for Coupons" style={{ height: "40px" }} />
+                    <input type="text" id="Input-Home" onChange={(event) => setSearchInput(event.target.value)} placeholder="Search for Coupons" style={{ height: "40px" }} />
 
                     <div className="category-filter">
                         <select
@@ -92,19 +93,18 @@ function HomePage() {
                         </select>
                     </div>
 
-                    <ReactPopup />
+                    <ReactPopup updateCardsItems={updateCardsItems} />
                 </div>
                 <ul className="Cards-Container" id="scrollable-container-content">
                     {isLoading ?
                         <p>Loading...</p> : filteredItems.map(item => (
                             <CardItem item={item} key={item.id} clickedOnChatIcon={clickedOnChatIcon} id={v4()} />
-                        )
-                        )
+                        ))
                     }
                 </ul>
             </div>
         );
-    }, [cardsItems, isLoading, filterOptions,searchInput]);
+    }, [cardsItems, isLoading, filterOptions, searchInput]);
 
     const MainItem = useCallback(() => {
         const storedUserDetails = JSON.parse(Cookies.get('userDetails'));
@@ -119,9 +119,8 @@ function HomePage() {
                     case "":
                         return <div className="Middle-Container"><p style={{ color: "#ffffff", fontSize: "20px" }}>Chat Section is Coming Soon</p></div>;
                     default:
-                        return <div className="Middle-Container"><p style={{ color: "#ffffff", }}>I know you want to chat with <br />{usernameChat}, We are on the way to make you connect with <br />{usernameChat}. Please wait, the Chat section is on the way.</p></div>;
+                        return <div className="Middle-Container"><p style={{ color: "#ffffff" }}>I know you want to chat with <br />{usernameChat}, We are on the way to make you connect with <br />{usernameChat}. Please wait, the Chat section is on the way.</p></div>;
                 }
-
             case "account":
                 return (
                     <div className="Middle-Container">
@@ -169,6 +168,12 @@ function HomePage() {
 >
   <MdAccountBox />
 </div>
+<div
+  className={`react-Icons ${selectedIcon === "message" ? "selected" : ""}`}
+  onClick={() => handleIconClick("message")}
+>
+  <BiSolidMessageDots />
+</div>
 
                 </div>
                 <div className="Logout-Container">
@@ -182,16 +187,19 @@ function HomePage() {
             </div>
             {MainItem()}
             <div className="Right-Bar">
-                <div
-  className={`react-Icons ${selectedIcon === "message" ? "selected" : ""}`}
-  onClick={() => handleIconClick("message")}
->
-  <BiSolidMessageDots />
-</div>
                 <h1>Chat Section<br /> Coming Soon</h1>
             </div>
         </div>
     );
 }
+
+function IconContainer({ selectedIcon, onClick, children }) {
+    return (
+        <div className={`react-Icons ${selectedIcon === children.props.iconName ? "selected" : ""}`} onClick={onClick}>
+            {children}
+        </div>
+    );
+}
+
 
 export default HomePage;
