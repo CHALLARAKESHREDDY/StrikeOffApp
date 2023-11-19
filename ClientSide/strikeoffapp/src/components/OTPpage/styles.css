@@ -1,0 +1,67 @@
+.App {
+ 
+    text-align: center;
+   display:flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: 20px;
+  }
+
+  .OTP-Container{
+    height:100vh;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.OTP-Button{
+    background-color: skyblue;
+    border-radius: 10px;
+   
+    padding:10px 17px;
+    margin:20px;
+}
+
+.OTP-Heading{
+    font-size: 30px;
+  }
+
+
+
+.small-screen {
+    width: 40px;
+    height: 40px;
+    /* Additional styles for small screens */
+  }
+  
+  .large-screen {
+    width: 54px;
+    height: 54px;
+    margin: 0 3%;
+    /* Additional styles for larger screens */
+  }
+
+  .OTP-Paragraph{
+    margin:20px;
+}
+
+  @media screen and (max-width:720px){
+   
+    .OTP-Heading{
+        font-size: 22px;
+      }
+    
+      .OTP-Button{
+        background-color: skyblue;
+        border-radius: 7px;
+       
+        padding:8px 15px;
+        margin:20px;
+    }
+
+    .OTP-Paragraph{
+        margin:15px;
+    }
+  }

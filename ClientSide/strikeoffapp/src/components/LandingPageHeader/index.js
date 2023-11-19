@@ -146,14 +146,15 @@ const Header = props => {
   return (
     <nav className="flex align-center">
     <p><span>Strike</span>Out</p>
-    <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
     
+    <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
+      
         <Link to="/" ><a style={{alignSelf:"center"}}>Home</a></Link>
         <Link to="/landingAbout"><a style={{alignSelf:"center"}}>About</a></Link>
 
        
-                <a onClick={changeRouteToLogin}>Login</a>
-                <a onClick={changeRouteToSignup} >Signup</a>
+                <Link to="/login"><a style={{cursor:"pointer"}}>Login</a></Link>
+                <Link to="/signup"><a  style={{cursor:"pointer"}} >Signup</a></Link>
         
       </div>
       <div className="menu-icon" onClick={toggleMenu}>

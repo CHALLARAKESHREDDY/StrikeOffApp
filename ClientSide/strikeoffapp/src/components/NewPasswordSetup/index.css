@@ -1,0 +1,72 @@
+.mainDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color:#0D042A;
+    /* Update with your desired background color */
+  }
+  
+  .cardStyle {
+   
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px; /* Adjust width as needed */
+  }
+  
+
+  .formTitle {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+   color:#ffffff
+  }
+  
+ 
+
+  .buttonWrapper {
+    text-align: center;
+  }
+  
+  .submitButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    margin:15px;
+  }
+  
+  .submitButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .message {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    width:40%;
+  }
+  
+  .error {
+    
+    text-align: center;
+    margin: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff0000;
+  }
+
+  .input-Label{
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    margin:5px;
+    margin-top: 10px;
+  }
+  

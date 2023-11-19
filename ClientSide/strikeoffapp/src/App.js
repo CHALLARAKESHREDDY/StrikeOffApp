@@ -8,6 +8,9 @@ import './App.css';
 import OTPAuthentication from "./components/OTPpage";
 import About from "./components/LandingPageAbout";
 import { useState } from "react";
+import ForgotPassword from "./components/ForgotPassword";
+import OTPAuthenticationForgotPassword from "./components/ForgotPasswordOTP";
+import NewPasswordSetup from "./components/NewPasswordSetup";
 
 function App() {
   const [details,setDetails]=useState("")
@@ -25,7 +28,11 @@ function App() {
     <Route exact path="/signup" element={<SignupPage />} />
     <Route exact path="/home" element={<HomePage />} />
     <Route exact path="/landingAbout" element={<About />} />
+
     <Route exact path="/OTPPage" element={<OTPAuthentication />} />
+    <Route exact path="/forgotPassword" element={<ForgotPassword />} />
+    <Route exact path="/forgot-OTP" element={<OTPAuthenticationForgotPassword />} />
+    <Route path="/New-Password-Setup" element={<NewPasswordSetup />} />
    </Routes>
    </BrowserRouter>
    </DataContext.Provider>

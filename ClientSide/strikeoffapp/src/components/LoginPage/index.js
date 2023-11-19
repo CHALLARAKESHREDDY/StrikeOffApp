@@ -12,6 +12,10 @@ function LoginPage() {
   const {setUserDetails}=useContext(DataContext)
   const history = useNavigate();
 
+  const forgotPasswordClicked=()=>{
+    history("/forgotPassword")
+  }
+
   const onSubmitForm = async (event) => {
     event.preventDefault();
 
@@ -59,7 +63,7 @@ function LoginPage() {
             </form>
             <div className="register-forget opacity">
                 <a onClick={changeRouteToSignupPage} style={{cursor:"pointer"}}>SIGNUP</a>
-                <a className="Signup">FORGOT PASSWORD</a>
+                <a className="Signup" onClick={forgotPasswordClicked} style={{cursor:"pointer"}}>FORGOT PASSWORD</a>
             </div>
             <p className="errorMsgLogin">{errorMsg}</p>
         </div>

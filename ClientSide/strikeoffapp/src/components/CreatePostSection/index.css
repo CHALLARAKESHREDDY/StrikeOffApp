@@ -116,7 +116,8 @@
   }
 
   .CreatePost-Heading{
-    font-size: 10px;
+    font-size: 20px;
+    color:black;
   }
 
 
@@ -151,6 +152,185 @@
   margin:7px;
   width:10px;
   width:100%;
+}
+#Create-post-option{
+  display:none;
+}
+
+@media screen and (max-width:1024px){
+  .Popup-Container{
+    height:550px;
+    width:600px;;
+    display:flex;
+    flex-direction: column;
+    align-self: center;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2); /* Lighter color with 20% transparency for a frosted glass effect */
+    backdrop-filter: blur(5px); /* Apply a blur effect to simulate frosted glass */ 
+    border: 1px solid #ffffff;
+    border-radius: 25px;
+    text-align: center;
+  }
+
+  label {
+    display: block;
+    margin-top: 5px;
+    font-weight: bold;
+    color: black;
+  }
+
+  
+select,
+input,
+textarea {
+  width: 97%;
+  height:39px;
+  padding: 3px;
+  margin-top: 3px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+  
+
+}
+
+
+@media screen and (max-width:912px){
+  .Popup-Container{
+    height:650px;
+    width:550px;;
+    display:flex;
+    flex-direction: column;
+    align-self: center;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2); /* Lighter color with 20% transparency for a frosted glass effect */
+    backdrop-filter: blur(5px); /* Apply a blur effect to simulate frosted glass */ 
+    border: 1px solid #ffffff;
+    border-radius: 25px;
+    text-align: center;
+  }
+
+  label {
+    display: block;
+    margin-top: 7px;
+    font-weight: bold;
+    color: black;
+    font-size: 16px;
+  }
+
+  
+select,
+input,
+textarea {
+  width: 98%;
+  height:45px;
+  padding: 3px;
+  margin-top: 3px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+  
+
+
+
+}
+
+@media screen and (max-width:600px){
+
+  .Create-Post-Button{
+    background-color:#774DFF ;
+    width:140px;
+    height:40px;
+    border-radius: 10px;
+    border-style:none ;
+    color: #ffffff;
+    margin:5px;
+    font-size: 17px;
+    font-weight: bold;
+ display:flex;
+ align-items: center;
+ justify-content: center;
+ margin-left:25px;
+ display:none;
+
+}
+#Create-post-option{
+display: block;
+  margin:5px;
+  padding-left:3px;
+}
+
+.Popup-Container{
+  height:550px;
+  width:350px;;
+  display:flex;
+  flex-direction: column;
+  align-self: center;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2); /* Lighter color with 20% transparency for a frosted glass effect */
+  backdrop-filter: blur(5px); /* Apply a blur effect to simulate frosted glass */ 
+  border: 1px solid #ffffff;
+  border-radius: 25px;
+  text-align: center;
+}
+.Popup-Container-div{
+  width:100%;
+
+}
+
+.CreatePost-Heading{
+  font-size: 80px;
+  color: black;
+}
+
+  
+.Popup-Container h1 {
+  text-align: center;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+
+select,
+input,
+textarea {
+  width: 97%;
+  height:37px;
+  padding: 3px;
+  margin-top: 3px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+label {
+  display: block;
+  margin-top: 7px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+#categorySelect{
+  width: 97%;
+  height:37px;
+  font-size: 12px;
+}
+
+
+
+
+
+
+
 }
 
   

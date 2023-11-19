@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {FcApproval} from 'react-icons/fc' 
+import { IoIosCreate } from "react-icons/io";
 import Cookies from 'js-cookie';
 import Axios from 'axios';
 import Popup from 'reactjs-popup';
@@ -39,9 +40,11 @@ const ReactPopup = ({ updateCardsItems }) => {
                     console.log(response.data);
                     updateCardsItems();
                     setPhoto("");
+                    setSelectedCategory("")
                     changeCouponCode("");
                     setDescription("");
                     setProductName("");
+                    setExpiredDate("")
                     setSubmitted(true);
 
                     // Update the cardsItems state by calling the provided function
@@ -57,12 +60,19 @@ const ReactPopup = ({ updateCardsItems }) => {
     };
 
     return (
-        <div>
+        <div className="Popup-Container-div">
             <Popup
                 trigger={
+                    <div>
                     <button type="button" className="Create-Post-Button">
                         <span className="Plus-Icon">+</span>Create Post
                     </button>
+                     <div id="Create-post-option">
+                     <IoIosCreate />
+                       CreatePost
+                     </div></div>
+                    
+
                 }
                 modal
             >
@@ -77,11 +87,11 @@ const ReactPopup = ({ updateCardsItems }) => {
                         {submitted ? (
                             <div className="submitted-message">
                                 <FcApproval style={{fontSize:"50px"}}/>
-                                <p>Form Submitted!</p>
+                                <p>Posted Successfully!</p>
                             </div>
                         ) : (
                             <form className="post-form" onSubmit={handleSubmit}>
-                                                        <h1 className="CreatePost-Heading" style={{ fontSize: "22px", color: "black" }}>Create New Post</h1>
+                                                        <h1 className="CreatePost-Heading" style={{ fontSize: "18px", color: "black" }}>Create New Post</h1>
 
                                 <div>
                                     <label htmlFor="categorySelect">Select Category:</label>

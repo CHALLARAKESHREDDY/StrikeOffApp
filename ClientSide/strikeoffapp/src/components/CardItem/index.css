@@ -1,5 +1,5 @@
 .Cards {
-    width: 90%;
+    width: 93%;
     height: 180px;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 20px;
@@ -8,29 +8,42 @@
     justify-content: space-between; /* Space between elements */
     margin: 12px;
     padding: 10px; /* Add padding for spacing */
+    border:1px solid rgba(255, 255, 255, 0.2);
+
   }
   
   .image-Container {
-    width: 25%;
+    width: 200px;
+    height:200px;
     display:flex;
+    flex-direction: column;
     justify-content: center;
     align-items:center;
+    height:165px;
+    text-align: center;
+    align-self: center;
+    font-size: 10px;
+  
 
   }
   
   .Card-Image {
-    width: 90%;
-    height: 170px;
+    width:160px;
+    height: 160px;
     border-radius: 15px;
-    margin: 20px;
+    margin: 10px;
+    justify-content: center;
+    align-items:center;
+    text-align: center;
   }
   
-  .Description-Container {
-    width: 70%; /* Adjust width */
+  #Description-Container {
+    width: 75%; /* Adjust width */
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Space between elements */
     align-items: flex-start;
+    margin-left:5px;
   }
   
   .card-para {
@@ -38,20 +51,23 @@
     margin: 5px 0;
   }
 
-.sameline-elements{
+.sameline-elements-coupon{
     display:flex;
+    width:95%;
+    justify-content: space-between;
+    align-items: center;
     
 }
 
 .Details-Container {
     max-height: 150px; /* Limit the maximum height of the details */
   /* Add a scroll bar when content exceeds the max height */
-    padding-right: 10px; /* Create space for the scrollbar */
+   /* Create space for the scrollbar */
  
   }
 
   #Expire-Date{
-    margin-left:60px;
+    margin-left:120px;
   }
   
   /* Add any o
@@ -62,5 +78,230 @@
     align-self:center;
     margin:0px 10px;
     cursor: pointer;
+    font-size: 20px;
+  }
+
+  #mobile-view-elements{
+    display: none;
+  }
+
+  @media screen and (max-width:1024px){
+    
+.sameline-elements-coupon{
+  display:flex;
+  width:100%;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  
+}
+.image-Container {
+  width: 140px;
+  height:140px;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  margin:7px;
+
+
+}
+  
+.Card-Image {
+  width:140px;
+  height: 140px;
+  border-radius: 15px;
+  margin: 10px;
+  justify-content: center;
+  align-items:center;
+  text-align: center;
+}
+ 
+.card-para {
+  color: #ffffff;
+  
+  font-size: 15px;
+  margin-left:5px;
+}
+#Description-Container {
+  width: 75%; /* Adjust width */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space between elements */
+  align-items: flex-start;
+  margin-left:5px;
+}
+
+    
+  }
+
+  @media screen and (max-width:912px){
+    .Cards {
+      width: 95%;
+      height: 215px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Space between elements */
+      margin: 12px;
+      padding: 10px; /* Add padding for spacing */
+      border:1px solid rgba(255, 255, 255, 0.4);
+
+    }
+    .Card-Image {
+      width: 160px;
+      height: 175px;
+      border-radius: 15px;
+      margin: 10px;
+    }
+
+    .sameline-elements-coupon{
+      display: flex;
+      flex-direction: column;
+      display: none;
+      
+      
+    }
+    #sameline-coupon{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .expiresOn{
+     
+      margin-bottom: 0px;
+      align-self: flex-start;
+    }
+    .image-Container {
+      width: 160px;
+      height:170px;
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items:center;
+      margin:7px;
+    
+    
+    }
+
+
+
+  .card-para{
+    color: #ffffff;
+    font-size: 17px;
+    margin:0px;
+    margin-top:3px;
+  }
+      
+  #mobile-view-elements{
+    display: block;
+  }
+  #Description-Container {
+    width: 75%; /* Adjust width */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space between elements */
+    align-items: flex-start;
+    margin-left:8px;
   }
   
+
+
+  }
+  
+
+  @media screen and (max-width:600px){
+    .Cards {
+      width: 93%;
+      height: 125px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Space between elements */
+      margin: 7px;
+      padding: 10px; /* Add padding for spacing */
+    }
+    .image-Container {
+      display:flex;
+      justify-content: center;
+      align-items:center;
+      margin-right:5px;
+      width:100px;
+  
+    }
+    .Card-Image {
+      width: 100px;
+      height: 105px;
+      border-radius: 15px;
+      margin: 10px;
+    }
+    
+    #Description-Container {
+      width: 70%; /* Adjust width */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* Space between elements */
+      align-items: flex-start;
+      margin-left:5px;
+    }  
+
+  .card-para {
+    color: #ffffff;
+    margin:0px;
+    font-size: 11px;
+    margin-top:3px;
+  
+  }
+
+  .card-para-small{
+    color: #ffffff;
+    font-size: 10px;
+  }
+
+
+
+.Chat-Icon{
+  align-self:flex-start;
+  margin-left:2px;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+
+#Details{
+  display: none;
+}
+.sameline-elements-coupo{
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+  align-items: center;
+  display: none;
+  
+}
+
+.expiresOn{
+  font-size:11px ;
+ margin-top:3px;
+ margin-bottom:0px;
+  align-self: flex-start;
+}
+
+#mobile-view-elements{
+  display: block;
+}
+
+
+.Chat-Icon{
+  align-self:center;
+  margin:0px 10px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+    
+  }
+
+

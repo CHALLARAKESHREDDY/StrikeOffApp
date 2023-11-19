@@ -14,13 +14,16 @@ function CardItem(props){
     return(
   
 <li className="Cards">
-<div className="image-Container"><img className="Card-Image" src={imageUrl} alt="shopping-img"/></div>
-<div className="Description-Container">
+<div className="image-Container"><img className="Card-Image" src={imageUrl}    onerror="showAltText(this, 'Alternative Text')"  alt="shopping-img"  /></div>
+<div id="Description-Container">
    
    <p className="card-para">{productName}</p>
-   <div className="sameline-elements"><p className="card-para">Coupon Code : {couponCode}</p><p className="card-para" id="Expire-Date">Expries On : {expiresDate.toLocaleDateString()}</p></div>
-    <p className="card-para">Details : {description}</p>
-    <div className="sameline-elements"><p className="card-para">Category : {category}</p><p className="card-para" id="Expire-Date">Posted By : {username}</p> <BsChatSquareDots className="Chat-Icon"  style={{fontSize:"20px",color:"skyblue"}}  onClick={() => chatIconClick(username)}  /></div>
+   <div className="sameline-elements-coupon" ><p className="card-para">CouponCode: {couponCode}</p><p  className="expiresOn" >ExpriesOn: {expiresDate.toLocaleDateString()}</p></div>
+   <p className="card-para" id="mobile-view-elements">CouponCode: {couponCode}</p><p  className="card-para" id="mobile-view-elements">ExpriesOn: {expiresDate.toLocaleDateString()}</p>
+    <p className="card-para" id="Details">Details : {description}</p>
+    <div className="sameline-elements-coupon" ><p className="card-para">Category : {category}</p><div style={{display:"flex"}} className="chat-icon-container"><p className="card-para">PostedBy : {username}</p> <BsChatSquareDots className="Chat-Icon"  style={{color:"skyblue"}}  onClick={() => chatIconClick(username)}  /></div></div>
+   
+    <p className="card-para" id="mobile-view-elements">Category : {category}</p><div style={{display:"flex"}} className="chat-icon-container" id="mobile-view-elements"><p className="card-para" id="mobile-view-elements">PostedBy : {username}</p> <BsChatSquareDots  id="mobile-view-elements" className="Chat-Icon"  style={{color:"skyblue"}}  onClick={() => chatIconClick(username)}  /></div>
 </div>
 </li>
 

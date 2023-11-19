@@ -5,15 +5,15 @@
    display:flex;
    background-color: rgba(13, 4, 42, 1);
    height:100vh;
-   
+   width:100%;
  
   
    
 }
 
-.Side-Bar{
+#Side-Bar{
     height:100vh;
-    width:140px;
+    width:10%;
 
     border-top-right-radius:35px ;
     border-bottom-right-radius: 35px;
@@ -21,20 +21,18 @@
     display:flex;
     flex-direction: column;
     justify-content: space-between;
-
+align-items: center;
     padding-top:40px;
     padding-bottom:40px;
     box-sizing: border-box;
     border: 1px solid #2E1C67;
     position: fixed;
-    flex:1;
    
-            
-          
-            position: fixed;
-            height: 100%;
+  
    
 }
+
+
 
 
 .Strikeout-Logo-Home{
@@ -51,6 +49,7 @@
     flex: 3;
             overflow-y: scroll;
            width:75%;
+           
 }
 
 
@@ -78,23 +77,24 @@
     font-size: 32px;
     color:#2E1C67;
     margin:15px;
+    align-self: center;
 }
 
 .Cards-Main-Container{
     height:100vh;
-    width:86%;
+    width:88%;
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: fixed;
-    top: 50%;
-    left: 45%;
-    transform: translate(-50%, -50%);
-   
-  
+    text-align: center;
     
    
+}
+
+#Logos-Container{
+align-self: center;
+
 }
 
 .Right-Bar{
@@ -112,6 +112,7 @@
             position: fixed;
             height: 100%;
             right: 0;
+            text-align: center;
     
 }
 /* Add the following styles to your existing CSS file or component */
@@ -122,12 +123,15 @@
     justify-content: center;
     
     background-color:transparent;
-    align-self:flex-end;
+    align-self:center;
+    text-align: center ;
     padding: 10px;
     width:100%;
-    height:60px;
+    height:50px;
     margin:20px 5px;
   }
+
+  
   
   /* Style for the input element */
 
@@ -155,6 +159,8 @@
   /* Style for WebKit-based browsers (Chrome, Safari) */
   #scrollable-container-content::-webkit-scrollbar {
     width: 0.5em; /* Set the width of the scrollbar */
+    height:100%;
+    text-align: center;
   }
   
  
@@ -206,3 +212,232 @@ select {
 }
 
 /* Style the button as needed */
+
+/* Add or modify the following styles in your existing CSS */
+
+/* Responsive Design */
+
+
+
+@media screen and (max-width:1100px){
+  .Strikeout-Logo-Home{
+    font-size: 13px;
+    font-weight: 400;
+    color: #c96ff0;
+    font-family: "Monoton";
+}
+
+
+.react-Icons{
+  font-size: 28px;
+  color:#2E1C67;
+  margin:15px;
+  align-self: center;
+}
+
+.Logout-Logo{
+  font-size: 28px;
+  margin:0px;
+  
+}
+
+
+
+.Logout-Text{
+  margin:7px;
+  font-size: 12px;
+}
+
+.MyAccount-Container{
+
+  background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+
+  width:50%;
+  height:350px;
+  border-radius: 25px;
+  border:0.5px solid #2E1C67;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+
+
+}
+
+
+@media screen and (max-width: 912px) {
+
+  .Right-Bar{
+    display: none;
+  }
+    
+#Input-Home{
+  width:40%;
+  height:30px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  font-size: 15px;
+  padding-left:20px;
+
+}
+
+    
+
+#Side-Bar{
+  height:100vh;
+  width:17%;
+
+  border-top-right-radius:35px ;
+  border-bottom-right-radius: 35px;
+  background-color: #12063B;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+align-items: center;
+  padding-top:40px;
+  padding-bottom:40px;
+  box-sizing: border-box;
+  border: 1px solid #2E1C67;
+  position: fixed;
+ 
+
+ 
+}
+.Cards-Main-Container{
+  height:100vh;
+  width:100%;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+
+  
+ 
+}
+.Cards-Container{
+   
+
+
+  flex: 3;
+          overflow-y: scroll;
+         width:80%;
+         text-align: end;
+         
+}
+.Search-Container {
+  display: flex;
+  justify-content: center;
+  
+  background-color:transparent;
+  align-self:flex-end;
+  padding: 10px;
+  width:80%;
+  height:60px;
+  margin:20px 5px;
+}
+.MyAccount-Container{
+
+  background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+
+  width:70%;
+  height:350px;
+  border-radius: 25px;
+  border:0.5px solid #2E1C67;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.Middle-Container{
+  height:100vh;
+  width:83%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left:16%;
+  
+}
+
+}
+@media (max-width: 600px) {
+ #Side-Bar{
+  display: none;
+ }
+
+ .Cards-Container{
+          overflow-y: scroll;
+         width:100%;
+        
+         display:flex;
+         flex-direction: column;
+         align-items: center;
+    
+}
+.Cards-Main-Container{
+  max-height:90vh;
+  width:100%;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  
+}
+
+.Search-Container {
+  display: none;
+  justify-content: center;
+  
+  background-color:transparent;
+  align-self:flex-end;
+  padding: 10px;
+  width:100%;
+  height:40px;
+  margin:20px 5px;
+}
+
+.Home-Container {
+  display:flex;
+  flex-direction: column;
+  background-color: rgba(13, 4, 42, 1);
+  height:100vh;
+  width:100%;
+  
+}
+.MyAccount-Container{
+
+  background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+
+  width:80%;
+  height:50%;
+  border-radius: 25px;
+  border:0.5px solid #2E1C67;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  
+}
+.Middle-Container{
+  height:100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width:100%;
+  left:0%;
+  
+  
+}
+  
+  /* Style for WebKit-based browsers (Chrome, Safari) */
+  #scrollable-container-content::-webkit-scrollbar {
+    width:100%; /* Set the width of the scrollbar */
+    height:100%;
+    text-align: center;
+  }
+}

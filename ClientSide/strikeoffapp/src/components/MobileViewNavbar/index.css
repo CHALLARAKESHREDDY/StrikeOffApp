@@ -1,0 +1,84 @@
+/* MobileNavbar.css */
+.MobileNavbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #12063B;
+    border-bottom:1px solid #2E1C67;
+    color: #fff;
+    width:100%;
+    height:10vh;
+   
+  }
+  
+  .MenuIcon {
+    cursor: pointer;
+    margin-right:10px;
+    margin-top:7px;
+    font-size:21px;
+
+    
+  }
+  
+  .MobileMenu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    background-color: #12063B;
+    border-bottom:1px solid #2E1C67;
+   
+    padding: 10px;
+    z-index: 999;
+  }
+  
+  .MenuItem {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .MenuItem:hover {
+    background-color: #555;
+  }
+
+  .StrikeOut-Loggo{
+    color: #c96ff0;
+    margin:0px;
+  }
+  
+  .Input-Filter-Mobilemode{
+  
+     display:flex;
+     justify-content: center;
+     align-items: center;
+     text-align: center; margin-right:45px;
+
+     
+  }
+
+  #Input-Mobilemode{
+    width:80%;
+    align-self: center;
+    
+   
+  }
+
+  .category-filter-Mobilemode{
+       width:5%;
+       height:25px;
+       align-self: flex-start;
+    
+
+       
+  }
+
+  .category-Select{
+    width:25px;
+    border-radius: 4px;
+    
+  }

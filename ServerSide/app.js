@@ -129,8 +129,7 @@ app.post('/tasks', async (req, res) => {
 
 app.post('/verify-otp', async (req, res) => {
   const { otp } = req.body;
-  console.log(userName)
-  console.log(otp)
+
   console.log(globalOTP)
   if (otp === globalOTP) {
     // OTP is correct, so proceed to create the user
@@ -271,4 +270,102 @@ app.get('/cards', async (req, res) => {
   }
 })
 */
+
+
+
+
+
+app.post('/forgotPassword-Email-Verification', async (req, res) => {
+  const { email } = req.body;
+console.log(email)
+  EmailAddress = email
+
+  try {
+    const existingUser = await Task.findOne({ emailAddress: email }).exec();
+    console.log(existingUser)
+    if (existingUser) {
+      const transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false,
+        requireTLS: true,
+        auth: {
+          user: "rakeshreddynanim30@gmail.com",
+          pass: "vglq sung exaj lird",
+        },
+        tls: {
+          rejectUnauthorized: false,
+        }
+      });
+
+      // Generate a random OTP (e.g., 6 digits)
+      const generateOTP = () => {
+        return Math.floor(100000 + Math.random() * 900000).toString();
+      };
+
+      // Email OTP to the user
+      const generatedOTP = generateOTP();
+      globalOTP = generatedOTP;
+
+      const mailOptions = {
+        from: "rakeshreddynanim30@gmail.com",
+        to: EmailAddress,
+        subject: "Your OTP for Email Verification",
+        text: `Hello, I am Rakesh. Please provide your OTP. Your OTP is: ${generatedOTP}`,
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log("Error sending email: " + error);
+        } else {
+          console.log("Email sent: " + info.response);
+        }
+      });
+
+      res.send("OTP Sent to your registered email id");
+     
+      }
+      else{
+         res.send("User not Registered")
+      }
+
+
+  } catch (error) {
+    res.status(500).json({ error: 'Error creating user' });
+  }
+});
+
+
+
+app.post('/verify-otp-forgotPassword', async (req, res) => {
+  const { otp } = req.body;
+
+
+  if (otp === globalOTP) {
+   res.send("Correct OTP")
+  } else {
+    // OTP is incorrect
+    res.send("OTP Verification failed")
+  }
+});
+
+
+app.put('/update-password',async(req,res)=>{
+  const {password,emailAddress}=req.body
+  if (password.length<6){
+    
+    res.send("Please enter a password of atleast 6 characters")
+  }else{
+  try{
+    const response= await Task.updateOne({ emailAddress:emailAddress },
+    { $set: { password: password } })
+    console.log(response)
+    res.send(response)
+  }catch (e){
+    res.send(e.message)
+  }}
+})
+
+
+
 
