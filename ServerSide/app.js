@@ -242,7 +242,7 @@ app.get('/cards', async (req, res) => {
     const cards = await productDetails.find(); // Retrieve all documents from the "productDetails" collection
     res.status(200).json(cards);
   } catch (error) {
-    res.status(500).json({ error: 'Error fetching cards' });
+    res.status(500).json({ error: 'Error fetching cars' });
   }
 });
 
