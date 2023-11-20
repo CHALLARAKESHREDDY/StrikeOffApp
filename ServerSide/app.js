@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 // app.js (continued)
 const mongoose = require('mongoose');
 mongoose.set("strictQuery",true)
-const dbURL = 'mongodb://127.0.0.1:27017/mydbname'; // Replace with your MongoDB URL  mongodb://localhost:27017/?readPreference=primary&ssl=false&directConnection=true
+const dbURL = 'mongodb+srv://StrikeOut:Rak1237@cluster0.oz1b53i.mongodb.net/'; // Replace with your MongoDB URL  mongodb://localhost:27017/?readPreference=primary&ssl=false&directConnection=true
 
 
 
