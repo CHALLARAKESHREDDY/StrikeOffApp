@@ -48,7 +48,7 @@ function SignupPage(){
       
       
         try {
-            const response = await Axios.post('http://localhost:3007/tasks', {username:username, password: password,emailAddress:emailAddress});
+            const response = await Axios.post('https://strikeout-serverside.onrender.com/tasks', {username:username, password: password,emailAddress:emailAddress});
           
             if (response.data==="OTP Sent to your registered email id"){
                  changeRouteToOTPPage()

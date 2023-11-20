@@ -25,7 +25,7 @@ function LoginPage() {
     }
 
     try {
-      let response = await axios.post('http://localhost:3007/login', {
+      let response = await axios.post('https://strikeout-serverside.onrender.com/login', {
         username: emailAddress,
         password: password,
       });

@@ -74,7 +74,7 @@ const changeIcon = (icon) => {
   const fetchData = useCallback(async () => {
     try {
       const jwtTokenClient = Cookies.get("jwtToken");
-      const response = await Axios.get('http://localhost:3007/cards', {
+      const response = await Axios.get('https://strikeout-serverside.onrender.com/cards', {
         headers: {
           Authorization: `Bearer ${jwtTokenClient}`,
         },

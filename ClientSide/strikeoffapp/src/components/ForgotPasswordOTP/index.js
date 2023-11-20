@@ -66,7 +66,7 @@ function OTPAuthenticationForgotPassword() {
     
 
     try {
-      const response = await Axios.post('http://localhost:3007/verify-otp-forgotPassword', { otp});
+      const response = await Axios.post('https://strikeout-serverside.onrender.com/verify-otp-forgotPassword', { otp});
   
       if (response.data === 'Correct OTP') {
        

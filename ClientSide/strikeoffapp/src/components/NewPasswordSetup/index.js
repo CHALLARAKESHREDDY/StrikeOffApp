@@ -34,7 +34,7 @@ function NewPasswordSetup() {
     } else {
       try {
         const emailAddress = localStorage.getItem('emailAddress');
-        const response = await axios.put('http://localhost:3007/update-password', { password, emailAddress });
+        const response = await axios.put('https://strikeout-serverside.onrender.com/update-password', { password, emailAddress });
   
         
         if(response.data==="Please enter a password of atleast 6 characters"){

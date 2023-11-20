@@ -32,7 +32,7 @@ const ReactPopup = ({ updateCardsItems }) => {
         } else {
             try {
                 const jwtTokenClient = await Cookies.get("jwtToken");
-                const response = await Axios.post("http://localhost:3007/productDetails", { category, productName, couponCode, expiresOn, description, imageUrl, jwtTokenClient });
+                const response = await Axios.post("https://strikeout-serverside.onrender.com/productDetails", { category, productName, couponCode, expiresOn, description, imageUrl, jwtTokenClient });
                 if (response.data !== 'Data posted successfully') {
                     changeErorMsg(response.data);
                 } else {

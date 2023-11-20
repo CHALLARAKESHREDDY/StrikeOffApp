@@ -12,7 +12,7 @@ function ForgotPassword() {
 
     const emailSubmit = async () => {
         try {
-            const response = await axios.post("http://localhost:3007/forgotPassword-Email-Verification", { email });
+            const response = await axios.post("https://strikeout-serverside.onrender.com/forgotPassword-Email-Verification", { email });
             console.log(response)
             if (response.data === 'OTP Sent to your registered email id'){
                 localStorage.setItem("emailAddress",email)
