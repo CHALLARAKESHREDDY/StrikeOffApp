@@ -11,6 +11,7 @@ import { useState } from "react";
 import ForgotPassword from "./components/ForgotPassword";
 import OTPAuthenticationForgotPassword from "./components/ForgotPasswordOTP";
 import NewPasswordSetup from "./components/NewPasswordSetup";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [details,setDetails]=useState("")
@@ -33,6 +34,7 @@ function App() {
     <Route exact path="/forgotPassword" element={<ForgotPassword />} />
     <Route exact path="/forgot-OTP" element={<OTPAuthenticationForgotPassword />} />
     <Route path="/New-Password-Setup" element={<NewPasswordSetup />} />
+    <Route path="*" element={<NotFound />} />
    </Routes>
    </BrowserRouter>
    </DataContext.Provider>

@@ -1,15 +1,15 @@
 // MobileNavbar.js
 import React, { useState } from "react";
-import { FaBriefcase } from 'react-icons/fa';
 import { BiSolidMessageDots } from 'react-icons/bi';
 import ReactPopup from "../CreatePostSection";
-import { IoIosCreate } from "react-icons/io";
+import { HiOutlineLogout } from "react-icons/hi";
+import NavigateWrapper from '../NavigatorComponent';
 import { MdAccountBox } from 'react-icons/md';
 import { AiTwotoneHome } from 'react-icons/ai';
-import { AiOutlineMenu, AiOutlineSearch, AiOutlineFilter, AiOutlineForm } from 'react-icons/ai';
+import { AiOutlineMenu,} from 'react-icons/ai';
 import './index.css'; // Create a corresponding CSS file for styling
 
-const MobileNavbar = ({ onSearch, onFilter, onCreatePost,changeIcon,fetchData}) => {
+const MobileNavbar = ({ onSearch, onFilter,changeIcon,fetchData,navigateToLoginPage}) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [filterOptions, setFilter] = useState("");
   const [searchInput, setSearchInput] = useState("");
@@ -72,6 +72,15 @@ const changeFilter=(value)=>{
             <MdAccountBox />
             MyAccount
           </div>
+         
+          <NavigateWrapper>
+            {(navigate) => (
+               <div className="MenuItem" onClick={() => navigateToLoginPage(navigate)}>
+              <HiOutlineLogout   /> Logout</div>
+            )}
+          </NavigateWrapper>
+          
+         
         </div>
       )}
     </div>

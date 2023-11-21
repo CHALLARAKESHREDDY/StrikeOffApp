@@ -14,7 +14,7 @@ function CardItem(props){
     return(
   
 <li className="Cards">
-<div className="image-Container"><img className="Card-Image" src={imageUrl}    onerror="showAltText(this, 'Alternative Text')"  alt="shopping-img"  /></div>
+<div className="image-Container"><img className="Card-Image" src={imageUrl}      alt="shopping-img"  /></div>
 <div id="Description-Container">
    
    <p className="card-para">{productName}</p>

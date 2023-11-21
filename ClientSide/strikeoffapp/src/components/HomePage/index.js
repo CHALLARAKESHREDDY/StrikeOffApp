@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import Cookies from "js-cookie";
 import { v4 as uuidv4 } from "uuid";
 import Axios from "axios";
+import { GiEmptyHourglass } from "react-icons/gi";
+
 import { Navigate } from "react-router-dom";
 import { HiOutlineLogout } from "react-icons/hi";
 import { FaBriefcase } from 'react-icons/fa';
@@ -10,6 +12,8 @@ import { MdAccountBox } from 'react-icons/md';
 import { AiTwotoneHome } from 'react-icons/ai';
 import ReactPopup from "../CreatePostSection";
 import CardItem from "../CardItem";
+import { FcEmptyTrash } from "react-icons/fc";
+
 import { FcBusinessman } from 'react-icons/fc';
 import NavigateWrapper from '../NavigatorComponent';
 import MobileNavbar from "../MobileViewNavbar";
@@ -29,8 +33,7 @@ function HomePage() {
   const [usernameChat, setUsernameChat] = useState("");
   const [filterOptions, setFilter] = useState("");
   const [searchInput, setSearchInput] = useState("");
-  const [mobileMode,setMobileMode]=useState(window.innerWidth <= 600);
-
+  const [mobileMode, setMobileMode] = useState(window.innerWidth <= 600);
 
   useEffect(() => {
     fetchData();
@@ -45,32 +48,17 @@ function HomePage() {
     };
   }, []);
 
+  const navigateToLoginPage = useCallback((navigate) => {
+    Cookies.remove("jwtToken");
+    Cookies.remove("userDetails");
+    navigate('/login');
+  }, []);
+
   const clickedOnChatIcon = (username) => {
     handleIconClick("message");
     setUsernameChat(username);
-};
+  };
 
-const handleSearch = (value) => {
-  // Implement search functionality
-  setSearchInput(value)
-  console.log(value)
-  console.log('Search clicked');
-};
-
-const handleFilter = (value) => {
-  // Implement filter functionality
-  setFilter(value)
-};
-
-const handleCreatePost = () => {
-  // Implement create post functionality
-  console.log('Create Post clicked');
-};
-
-const changeIcon = (icon) => {
-  handleIconClick(icon);
-};
- 
   const fetchData = useCallback(async () => {
     try {
       const jwtTokenClient = Cookies.get("jwtToken");
@@ -86,14 +74,23 @@ const changeIcon = (icon) => {
     }
   }, []);
 
-  const navigateToLoginPage = useCallback((navigate) => {
-    Cookies.remove("jwtToken");
-    Cookies.remove("userDetails");
-    navigate('/login');
-  }, []);
+  const handleSearch = (value) => {
+    setSearchInput(value);
+  };
+
+  const handleFilter = (value) => {
+    setFilter(value);
+  };
+
+  const handleCreatePost = () => {
+    console.log('Create Post clicked');
+  };
+
+  const changeIcon = (icon) => {
+    handleIconClick(icon);
+  };
 
   const handleIconClick = useCallback((icon) => {
-    console.log("clickedin")
     setSelectedIcon(icon);
   }, []);
 
@@ -106,6 +103,29 @@ const changeIcon = (icon) => {
       );
     });
 
+    const CardItemsFunction=()=>{
+      if (filteredItems.length===0){
+        return(
+          <div className="Cards-Container" style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",textAlign:"center"}}>
+           
+
+            <FcEmptyTrash style={{fontSize:"140px"}}/>
+<br/>
+            <p>noItems-Found</p>
+          </div>
+        )
+      }
+      return(
+        <ul className="Cards-Container" id="scrollable-container-content">
+          {isLoading ? <p>Loading...</p> : filteredItems.map(item => (
+            <CardItem item={item} key={uuidv4()} clickedOnChatIcon={clickedOnChatIcon} />
+          ))}
+        </ul>
+      )
+    }
+
+
+
     return (
       <div className="Cards-Main-Container">
         <div className="Search-Container">
@@ -116,10 +136,8 @@ const changeIcon = (icon) => {
             placeholder="Search for Coupons"
             style={{ height: "40px" }}
           />
-
           <div className="category-filter">
             <select
-              
               name="filterOptions"
               value={filterOptions}
               onChange={(event) => setFilter(event.target.value)}
@@ -132,21 +150,17 @@ const changeIcon = (icon) => {
               <option value="Financial">Financial</option>
             </select>
           </div>
-
           <ReactPopup updateCardsItems={fetchData} />
         </div>
-        <ul className="Cards-Container" id="scrollable-container-content">
-          {isLoading ? <p>Loading...</p> : filteredItems.map(item => (
-            <CardItem item={item} key={uuidv4()} clickedOnChatIcon={clickedOnChatIcon} />
-          ))}
-        </ul>
+
+        {CardItemsFunction()}
+        
       </div>
     );
-  }, [cardsItems, isLoading, filterOptions, searchInput]);
+  }, [cardsItems, isLoading, filterOptions, searchInput, fetchData, clickedOnChatIcon]) ;
 
   const MainItem = useCallback(() => {
     const storedUserDetails = JSON.parse(Cookies.get('userDetails'));
- 
 
     switch (selectedIcon) {
       case ICON_NAMES.HOME:
@@ -172,8 +186,8 @@ const changeIcon = (icon) => {
               <p style={{ fontSize: "24px" }}>MyAccount</p>
               <FcBusinessman style={{ width: "50px", height: "50px" }} className="Profile-Icon" />
               <p style={{ fontSize: "15px" }}>Username: {storedUserDetails.username}</p>
-              <p style={{ fontSize: "15px",flexWrap:"wrap"}}>Email: {storedUserDetails.emailAddress}</p>
-              <p style={{ fontSize: "15px"}}>
+              <p style={{ fontSize: "15px", flexWrap: "wrap" }}>Email: {storedUserDetails.emailAddress}</p>
+              <p style={{ fontSize: "15px" }}>
                 Password: {'*'.repeat(storedUserDetails.password)}
               </p>
             </div>
@@ -182,7 +196,7 @@ const changeIcon = (icon) => {
       default:
         return null;
     }
-  }, [selectedIcon, cardsFunction, usernameChat]);
+  }, [selectedIcon, cardsFunction]);
 
   if (Cookies.get("jwtToken") === undefined) {
     return <Navigate to="/login" replace={true} />;
@@ -190,54 +204,62 @@ const changeIcon = (icon) => {
 
   return (
     <div className="Home-Container">
-      {mobileMode?
-      <div>
-      <MobileNavbar onSearch={handleSearch} onFilter={handleFilter} onCreatePost={handleCreatePost} changeIcon={changeIcon} fetchData={fetchData}/>
-    </div>:
-      <div id="Side-Bar">
-        <div><h1 className="Strikeout-Logo-Home">STRIKEOUT</h1></div>
-        <div id="Logos-Container">
-          <div
-            className={`react-Icons ${selectedIcon === ICON_NAMES.HOME ? "selected" : ""}`}
-            onClick={() => handleIconClick(ICON_NAMES.HOME)}
-          >
-            <AiTwotoneHome />
+      {mobileMode ? (
+        <MobileNavbar
+          onSearch={handleSearch}
+          onFilter={handleFilter}
+          onCreatePost={handleCreatePost}
+          changeIcon={changeIcon}
+          fetchData={fetchData}
+          navigateToLoginPage={navigateToLoginPage}
+        />
+      ) : (
+        <div id="Side-Bar">
+          <div><h1 className="Strikeout-Logo-Home">STRIKEOUT</h1></div>
+          <div id="Logos-Container">
+            <div
+              className={`react-Icons ${selectedIcon === ICON_NAMES.HOME ? "selected" : ""}`}
+              onClick={() => handleIconClick(ICON_NAMES.HOME)}
+            >
+              <AiTwotoneHome />
+            </div>
+            <div
+              className={`react-Icons ${selectedIcon === ICON_NAMES.BRIEFCASE ? "selected" : ""}`}
+              onClick={() => handleIconClick(ICON_NAMES.BRIEFCASE)}
+            >
+              <FaBriefcase />
+            </div>
+            <div
+              className={`react-Icons ${selectedIcon === ICON_NAMES.ACCOUNT ? "selected" : ""}`}
+              onClick={() => handleIconClick(ICON_NAMES.ACCOUNT)}
+            >
+              <MdAccountBox />
+            </div>
+            <div
+              className={`react-Icons ${selectedIcon === ICON_NAMES.MESSAGE ? "selected" : ""}`}
+              onClick={() => handleIconClick(ICON_NAMES.MESSAGE)}
+            >
+              <BiSolidMessageDots />
+            </div>
           </div>
-          <div
-            className={`react-Icons ${selectedIcon === ICON_NAMES.BRIEFCASE ? "selected" : ""}`}
-            onClick={() => handleIconClick(ICON_NAMES.BRIEFCASE)}
-          >
-            <FaBriefcase />
-          </div>
-          <div
-            className={`react-Icons ${selectedIcon === ICON_NAMES.ACCOUNT ? "selected" : ""}`}
-            onClick={() => handleIconClick(ICON_NAMES.ACCOUNT)}
-          >
-            <MdAccountBox />
-          </div>
-          <div
-            className={`react-Icons ${selectedIcon === ICON_NAMES.MESSAGE ? "selected" : ""}`}
-            onClick={() => handleIconClick(ICON_NAMES.MESSAGE)}
-          >
-            <BiSolidMessageDots />
+          <div className="Logout-Container">
+            <NavigateWrapper>
+              {(navigate) => (
+                <HiOutlineLogout className="Logout-Logo" onClick={() => navigateToLoginPage(navigate)} />
+              )}
+            </NavigateWrapper>
+            <p className="Logout-Text">Logout</p>
           </div>
         </div>
-        <div className="Logout-Container">
-          <NavigateWrapper>
-            {(navigate) => (
-              <HiOutlineLogout className="Logout-Logo" onClick={() => navigateToLoginPage(navigate)} />
-            )}
-          </NavigateWrapper>
-          <p className="Logout-Text">Logout</p>
-        </div>
-      </div>}
+      )}
       {MainItem()}
       <div className="Right-Bar">
-        <h1 style={{fontSize:"22px"}}>Chat Section<br /> Coming Soon</h1>
+        <h1 style={{ fontSize: "22px" }}>Chat Section<br /> Coming Soon</h1>
       </div>
     </div>
   );
 }
 
 export default HomePage;
+
 

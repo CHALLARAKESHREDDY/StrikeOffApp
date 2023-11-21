@@ -24,9 +24,9 @@ const dbURL = 'mongodb+srv://StrikeOut:Rak1237@cluster0.oz1b53i.mongodb.net/'; /
 const connection = async () => {
     try {
         await mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true });
-        console.log('Connected to MongoDB');
+        
         app.listen(3007, () => {
-            console.log(`Server is running on port ${3007}`);
+            
         });
     } catch (err) {
         console.error('Error connecting to MongoDB:', err);
@@ -35,12 +35,6 @@ const connection = async () => {
 
 
 connection()
-
-let globalOTP = '';
-
-let userName=""
-let passWord=""
-let EmailAddress=""
 
 const taskSchema = new mongoose.Schema({
   username: String,
@@ -56,18 +50,16 @@ const Task = mongoose.model('Task', taskSchema);
 
 app.post('/tasks', async (req, res) => {
   const { username, password, emailAddress } = req.body;
-  userName = username;
-  passWord = password;
-  EmailAddress = emailAddress;
+
 
   try {
     const existingUser = await Task.findOne({ $or: [{ username }, { emailAddress }] }).exec();
 
     if (existingUser) {
-      const errors = {};
+      
 
       if (existingUser.username === username) {
-        errors.username = 'Username already exists';
+        
 
         res.send("Username already exists");
       
@@ -75,7 +67,7 @@ app.post('/tasks', async (req, res) => {
       }
 
       if (existingUser.emailAddress === emailAddress) {
-        errors.emailAddress = 'Email already exists';
+      
 
         res.send("Email Already exits");
         return;
@@ -102,25 +94,32 @@ app.post('/tasks', async (req, res) => {
       };
 
       // Email OTP to the user
-      const generatedOTP = generateOTP();
-      globalOTP = generatedOTP;
+      
+      globalOTP = generateOTP();
+
+      req.session = {
+        username,
+        password,
+        emailAddress,
+        globalOTP,
+      };
 
       const mailOptions = {
         from: "rakeshreddynanim30@gmail.com",
         to: emailAddress,
         subject: "Your OTP for Email Verification",
-        text: `Hello, I am Rakesh. Please provide your OTP. Your OTP is: ${generatedOTP}`,
+        text: `Hello, I am Rakesh. Please provide your OTP. Your OTP is: ${globalOTP}`,
       };
 
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-          console.error("Error sending email: " + error);
+          res.send("Error sending email: " + error);
         } else {
-          console.log("Email sent: " + info.response);
+          res.send("OTP Sent to your registered email id");
         }
       });
 
-      res.send("OTP Sent to your registered email id");
+      
     }
   } catch (error) {
     res.status(500).json({ error: 'Error creating user' });
@@ -129,12 +128,12 @@ app.post('/tasks', async (req, res) => {
 
 app.post('/verify-otp', async (req, res) => {
   const { otp } = req.body;
+  const { username, password, emailAddress, globalOTP } = req.session || {};
 
-  console.log(globalOTP)
   if (otp === globalOTP) {
     // OTP is correct, so proceed to create the user
     try {
-      await Task.create({ username:userName, password:passWord, emailAddress:EmailAddress });
+      await Task.create({ username:username, password:password, emailAddress:emailAddress });
       res.status(200).send("User registered successfully!");
     } catch (error) {
       res.status(500).json({ error: 'Error creating user' });
@@ -185,19 +184,7 @@ const productDetailsSchema = new mongoose.Schema({
   
   const productDetails = mongoose.model('productDetails', productDetailsSchema);
   
- /* app.post('/productDetails', async (req, res) => {
-    const { category, productName, description, imageUrl } = req.body;
-    productDetails
-      .create({ category, productName, description, imageUrl })
-      .then(() => {
-        res.status(200);
-        res.send('Data posted Successfully!');
-      })
-      .catch((error) => {
-        res.status(500).json({ error: 'Error posting Data' });
-      });
-  });
-  */
+
   
       
 
@@ -226,9 +213,6 @@ app.post('/productDetails', async (req, res) => {
 });
 
 
-//const jwt = require('jsonwebtoken'); // Make sure to import the 'jsonwebtoken' library
- // Make sure to import the 'jsonwebtoken' library
-
 app.get('/cards', async (req, res) => {
   try {
     const token = req.headers.authorization.split(' ')[1]; // Extract the token from the "Authorization" header
@@ -253,23 +237,7 @@ app.get('/cards', async (req, res) => {
 
 
 
-/*app.post("/verify-otp",async(req,res)=>{
-  const {otp}=req.body
-  if (otp===globalOTP){
-    
-       // OTP is correct, so proceed to create the user
-    try {
-      await Task.create({ userName, passWord, EmailAddress });
-      res.status(200).send("User registered successfully!");
-    } catch (error) {
-      res.status(500).json({ error: 'Error creating user' });
-    }
-    res.send("success")
-  }else{
-    res.send("failed")
-  }
-})
-*/
+
 
 
 
@@ -277,7 +245,7 @@ app.get('/cards', async (req, res) => {
 
 app.post('/forgotPassword-Email-Verification', async (req, res) => {
   const { email } = req.body;
-console.log(email)
+
   EmailAddress = email
 
   try {
@@ -359,7 +327,7 @@ app.put('/update-password',async(req,res)=>{
   try{
     const response= await Task.updateOne({ emailAddress:emailAddress },
     { $set: { password: password } })
-    console.log(response)
+    
     res.send(response)
   }catch (e){
     res.send(e.message)

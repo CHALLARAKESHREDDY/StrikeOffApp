@@ -85,7 +85,7 @@ body{
   border-radius: 10px;
 
   width: 400px;
-  height: 400px;
+  height: 420px;
  
   padding: 10px 30px;
 
@@ -158,6 +158,20 @@ body{
   text-decoration: none;
 }
 
+.password-container {
+  position: relative;
+}
+
+.password-toggle-signup{
+ 
+  
+  position: absolute;
+  top: 50%;
+  right: 21px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #3498db;
+}
 
 @media screen and (max-width:500px){
     .card {
