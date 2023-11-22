@@ -128,7 +128,7 @@ app.post('/tasks', async (req, res) => {
 
 console.log("hello")
 
-app.post('/verify-otp-field', async (req, res) => {
+app.post('/verify-otp', async (req, res) => {
   console.log(otp)
   console.log(globalOTP)
   const { otp } = req.body;
