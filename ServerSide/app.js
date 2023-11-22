@@ -151,6 +151,29 @@ app.post('/verify-otp', async (req, res) => {
 });
 
 
+app.post('/verify-otp-field', async (req, res) => {
+  console.log(otp)
+  console.log(globalOTP)
+  const { otp } = req.body;
+  const { username, password, emailAddress, globalOTP } = req.session || {};
+
+
+  if (otp === globalOTP) {
+    // OTP is correct, so proceed to create the user
+    try {
+      await Task.create({ username:username, password:password, emailAddress:emailAddress });
+      res.status(200).send("User registered successfully!");
+    } catch (error) {
+      res.status(500).json({ error: 'Error creating user' });
+    }
+  } else {
+    // OTP is incorrect
+ 
+    res.send("OTP verification failed");
+  }
+});
+
+
 
 app.post('/login',async(req,res)=>{
     const {username,password} = req.body
