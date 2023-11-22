@@ -41,6 +41,8 @@ function SignupPage() {
       return;
     }
 
+    changeErrormsg("Please wait a moment")
+
     try {
       const response = await Axios.post('https://strikeout-serverside.onrender.com/tasks', {
         username: username,

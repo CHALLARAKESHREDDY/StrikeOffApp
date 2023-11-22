@@ -95,7 +95,7 @@ app.post('/tasks', async (req, res) => {
 
       // Email OTP to the user
       
-      globalOTP = generateOTP();
+      const globalOTP = generateOTP();
 
       req.session = {
         username,
@@ -108,7 +108,7 @@ app.post('/tasks', async (req, res) => {
         from: "rakeshreddynanim30@gmail.com",
         to: emailAddress,
         subject: "Your OTP for Email Verification",
-        text: `Hello, I am Rakesh. Please provide your OTP. Your OTP is: ${globalOTP}`,
+        text: `Hello, this email is regarding OTP verification for the StrikeOut app. Your OTP is: ${globalOTP}`,
       };
 
       transporter.sendMail(mailOptions, (error, info) => {
@@ -126,9 +126,14 @@ app.post('/tasks', async (req, res) => {
   }
 });
 
-app.post('/verify-otp', async (req, res) => {
+console.log("hello")
+
+app.post('/verify-otp-field', async (req, res) => {
+  console.log(otp)
+  console.log(globalOTP)
   const { otp } = req.body;
   const { username, password, emailAddress, globalOTP } = req.session || {};
+
 
   if (otp === globalOTP) {
     // OTP is correct, so proceed to create the user
@@ -140,6 +145,7 @@ app.post('/verify-otp', async (req, res) => {
     }
   } else {
     // OTP is incorrect
+ 
     res.send("OTP verification failed");
   }
 });

@@ -46,7 +46,7 @@ function OTPAuthentication() {
     
 
     try {
-      const response = await Axios.post('https://strikeout-serverside.onrender.com/verify-otp', { otp});
+      const response = await Axios.post('https://strikeout-serverside.onrender.com/verify-otp-field', { otp});
     
       if (response.data === 'User registered successfully!') {
         setSucessView(true)
