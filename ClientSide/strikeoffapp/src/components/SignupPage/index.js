@@ -11,11 +11,12 @@ function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [errorMsg, changeErrormsg] = useState('');
 
-  const changeRouteToLoginPage = () => {
+  const changeRouteToLoginPage= () => {
+    console.log("clicked")
     history('/login');
   };
 
-  const changeRouteToOTPPage = () => {
+  const changeRouteToOTP = () => {
     history('/OTPPage');
   };
 
@@ -49,9 +50,10 @@ function SignupPage() {
         password: password,
         emailAddress: emailAddress,
       });
-
-      if (response.data==="true") {
-        changeRouteToOTPPage();
+        console.log(response)
+      if (response.data===true) {
+        console.log("clicked")
+        changeRouteToOTP();
       } else {
         changeErrormsg(response.data);
       }

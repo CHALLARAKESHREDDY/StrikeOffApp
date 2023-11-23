@@ -119,7 +119,7 @@ app.post('/tasks', async (req, res) => {
       try {
         await transporter.sendMail(mailOptions)
    
-        res.send("true")
+        res.send(true)
       } catch (error) {
         res.send("Error sending email: " + error)
       }
@@ -130,7 +130,7 @@ app.post('/tasks', async (req, res) => {
 });
 
 
-app.post('/verify-op', async (req, res) => {
+app.post('/verify-otp', async (req, res) => {
 
   const {otp}=req.body
 
