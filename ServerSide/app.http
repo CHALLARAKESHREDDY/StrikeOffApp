@@ -4,7 +4,7 @@ Content-Type: application/json
 {
     "username": "rakeshChala",
     "password": "rak@1237ta",
-    "emailAddress":"raksh@gmail.com"
+    "emailAddress":"rakeshchr17@gmail.com"
 }
 
 
@@ -32,3 +32,13 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3007/cards/
+
+####
+
+
+POST http://localhost:3007/verify-otp-field/
+Content-Type: application/json
+
+{
+    "otp":895046
+}

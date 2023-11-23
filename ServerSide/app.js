@@ -14,6 +14,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // Define your routes and middleware here
 
+let userName
+let passW3ord
+let EmailAddress
+let globalOTP
+
 // app.js (continued)
 const mongoose = require('mongoose');
 mongoose.set("strictQuery",true)
@@ -95,14 +100,11 @@ app.post('/tasks', async (req, res) => {
 
       // Email OTP to the user
       
-      const globalOTP = generateOTP();
+      globalOTP = generateOTP();
 
-      req.session = {
-        username,
-        password,
-        emailAddress,
-        globalOTP,
-      };
+      userName=username
+      passWord=password
+      EmailAddress=emailAddress
 
       const mailOptions = {
         from: "rakeshreddynanim30@gmail.com",
@@ -110,6 +112,7 @@ app.post('/tasks', async (req, res) => {
         subject: "Your OTP for Email Verification",
         text: `Hello, this email is regarding OTP verification for the StrikeOut app. Your OTP is: ${globalOTP}`,
       };
+      console.log(globalOTP)
 
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
@@ -126,22 +129,16 @@ app.post('/tasks', async (req, res) => {
   }
 });
 
-console.log("hello")
 
 app.post('/verify-otp', async (req, res) => {
-  console.log(otp)
-  console.log(globalOTP)
-  const { otp } = req.body;
-  const { username, password, emailAddress, globalOTP } = req.session || {};
 
-
-  if (otp === globalOTP) {
+  if (otp == globalOTP) {
     // OTP is correct, so proceed to create the user
     try {
-      await Task.create({ username:username, password:password, emailAddress:emailAddress });
+      await Task.create({ username:userName, password:passWord, emailAddress:EmailAddress });
       res.status(200).send("User registered successfully!");
     } catch (error) {
-      res.status(500).json({ error: 'Error creating user' });
+      res.status(500).json(error.message);
     }
   } else {
     // OTP is incorrect
@@ -151,27 +148,6 @@ app.post('/verify-otp', async (req, res) => {
 });
 
 
-app.post('/verify-otp-field', async (req, res) => {
-  console.log(otp)
-  console.log(globalOTP)
-  const { otp } = req.body;
-  const { username, password, emailAddress, globalOTP } = req.session || {};
-
-
-  if (otp === globalOTP) {
-    // OTP is correct, so proceed to create the user
-    try {
-      await Task.create({ username:username, password:password, emailAddress:emailAddress });
-      res.status(200).send("User registered successfully!");
-    } catch (error) {
-      res.status(500).json({ error: 'Error creating user' });
-    }
-  } else {
-    // OTP is incorrect
- 
-    res.send("OTP verification failed");
-  }
-});
 
 
 
