@@ -60,6 +60,8 @@ app.post('/tasks', async (req, res) => {
   try {
     const existingUser = await Task.findOne({ $or: [{ username }, { emailAddress }] }).exec();
 
+    console.log(existingUser)
+
     if (existingUser) {
       
 
@@ -128,7 +130,7 @@ app.post('/tasks', async (req, res) => {
 });
 
 
-app.post('/verify-otp', async (req, res) => {
+app.post('/verify-op', async (req, res) => {
 
   const {otp}=req.body
 
@@ -137,6 +139,7 @@ app.post('/verify-otp', async (req, res) => {
     try {
       await Task.create({ username:userName, password:passWord, emailAddress:EmailAddress });
       res.send("true")
+      
     } catch (error) {
     
       res.send(error.message);
