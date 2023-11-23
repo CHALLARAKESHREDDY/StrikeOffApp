@@ -36,9 +36,9 @@ GET http://localhost:3007/cards/
 ####
 
 
-POST http://localhost:3007/verify-otp-field/
+POST http://localhost:3007/verify-otp/
 Content-Type: application/json
 
 {
-    "otp":895046
+    "otp":800859
 }

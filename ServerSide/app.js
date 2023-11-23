@@ -132,6 +132,8 @@ app.post('/tasks', async (req, res) => {
 
 app.post('/verify-otp', async (req, res) => {
 
+  const {otp}=req.body
+
   if (otp == globalOTP) {
     // OTP is correct, so proceed to create the user
     try {
