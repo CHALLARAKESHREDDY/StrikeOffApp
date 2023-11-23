@@ -65,7 +65,7 @@ app.post('/tasks', async (req, res) => {
 
       if (existingUser.username === username) {
         
-
+       res.status(400)
         res.send("Username already exists");
       
         return;
@@ -73,7 +73,7 @@ app.post('/tasks', async (req, res) => {
 
       if (existingUser.emailAddress === emailAddress) {
       
-
+        res.status(400)
         res.send("Email Already exits");
         return;
       }
