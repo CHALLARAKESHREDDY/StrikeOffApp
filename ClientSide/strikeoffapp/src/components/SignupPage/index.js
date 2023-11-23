@@ -50,7 +50,7 @@ function SignupPage() {
         emailAddress: emailAddress,
       });
 
-      if (response.status===200) {
+      if (response.data==="true") {
         changeRouteToOTPPage();
       } else {
         changeErrormsg(response.data);

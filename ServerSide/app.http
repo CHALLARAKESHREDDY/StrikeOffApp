@@ -2,7 +2,7 @@ POST http://localhost:3007/tasks/
 Content-Type: application/json
 
 {
-    "username": "rakeshChala",
+    "username": "praneetha",
     "password": "rak@1237ta",
     "emailAddress":"rakeshchr17@gmail.com"
 }

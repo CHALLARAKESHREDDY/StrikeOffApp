@@ -47,7 +47,7 @@ function OTPAuthentication() {
     try {
       const response = await Axios.post('https://strikeout-serverside.onrender.com/verify-otp', { otp});
     
-      if (response.status===200) {
+      if (response.data==="true") {
         setSucessView(true)
         setErrorMsg('SignedUp Successfully');
       } else {

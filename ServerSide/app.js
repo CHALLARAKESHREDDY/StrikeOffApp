@@ -65,7 +65,7 @@ app.post('/tasks', async (req, res) => {
 
       if (existingUser.username === username) {
         
-       res.status(400)
+     
         res.send("Username already exists");
       
         return;
@@ -73,7 +73,7 @@ app.post('/tasks', async (req, res) => {
 
       if (existingUser.emailAddress === emailAddress) {
       
-        res.status(400)
+   
         res.send("Email Already exits");
         return;
       }
@@ -115,14 +115,12 @@ app.post('/tasks', async (req, res) => {
       
 
       try {
-        await transporter.sendMail(mailOptions);
-        res.status(200)
-        res.send("OTP Sent to your registered email id");
+        await transporter.sendMail(mailOptions)
+   
+        res.send("true")
       } catch (error) {
-        res.status(400)
-        res.send("Error sending email: " + error);
+        res.send("Error sending email: " + error)
       }
-      
     }
   } catch (error) {
     res.status(500).json({ error: 'Error creating user' });
@@ -138,14 +136,14 @@ app.post('/verify-otp', async (req, res) => {
     // OTP is correct, so proceed to create the user
     try {
       await Task.create({ username:userName, password:passWord, emailAddress:EmailAddress });
-      res.status(200);
+      res.send("true")
     } catch (error) {
-      res.status(500)
+    
       res.send(error.message);
     }
   } else {
     // OTP is incorrect
-    res.status(400)
+  
     res.send("OTP verification failed");
   }
 });
