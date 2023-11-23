@@ -112,16 +112,16 @@ app.post('/tasks', async (req, res) => {
         subject: "Your OTP for Email Verification",
         text: `Hello, this email is regarding OTP verification for the StrikeOut app. Your OTP is: ${globalOTP}`,
       };
-      console.log(globalOTP)
+      
 
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          res.send("Error sending email: " + error);
-        } else {
-          res.send("OTP Sent to your registered email id");
-        }
-      });
-
+      try {
+        await transporter.sendMail(mailOptions);
+        res.status(200)
+        res.send("OTP Sent to your registered email id");
+      } catch (error) {
+        res.status(400)
+        res.send("Error sending email: " + error);
+      }
       
     }
   } catch (error) {
@@ -138,13 +138,14 @@ app.post('/verify-otp', async (req, res) => {
     // OTP is correct, so proceed to create the user
     try {
       await Task.create({ username:userName, password:passWord, emailAddress:EmailAddress });
-      res.status(200).send("User registered successfully!");
+      res.status(200);
     } catch (error) {
-      res.status(500).json(error.message);
+      res.status(500)
+      res.send(error.message);
     }
   } else {
     // OTP is incorrect
- 
+    res.status(400)
     res.send("OTP verification failed");
   }
 });

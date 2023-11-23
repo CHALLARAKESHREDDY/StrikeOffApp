@@ -18,7 +18,6 @@ import "./styles.css";
 
 function OTPAuthentication() {
   const [errorMsg, setErrorMsg] = useState('');
-  const [loading, setLoading] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [otp, setOtp] = useState("");
   const [successView,setSucessView]=useState(false)
@@ -42,13 +41,13 @@ function OTPAuthentication() {
 
 
   const handleSubmit = async () => {
-    setLoading(true);
+  
     
 
     try {
       const response = await Axios.post('https://strikeout-serverside.onrender.com/verify-otp', { otp});
     
-      if (response.data === 'User registered successfully!') {
+      if (response.status===200) {
         setSucessView(true)
         setErrorMsg('SignedUp Successfully');
       } else {
@@ -57,8 +56,6 @@ function OTPAuthentication() {
     } catch (e) {
       setSucessView(false)
       setErrorMsg('An error occurred while verifying OTP.');
-    } finally {
-      setLoading(false);
     }
   };
 

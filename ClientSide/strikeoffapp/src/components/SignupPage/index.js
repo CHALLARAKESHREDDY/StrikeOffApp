@@ -50,14 +50,13 @@ function SignupPage() {
         emailAddress: emailAddress,
       });
 
-      if (response.data === 'OTP Sent to your registered email id') {
+      if (response.status===200) {
         changeRouteToOTPPage();
       } else {
         changeErrormsg(response.data);
       }
     } catch (error) {
-      console.error('An error occurred. Please try again later.');
-      console.error('Error:', error);
+      changeErrormsg('An error occurred. Please try again later.')
     }
   };
 
