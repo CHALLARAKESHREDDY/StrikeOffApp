@@ -52,7 +52,7 @@ function SignupPage() {
       });
         console.log(response)
       if (response.data===true) {
-        console.log("clicked")
+     
         changeRouteToOTP();
       } else {
         changeErrormsg(response.data);
@@ -60,7 +60,7 @@ function SignupPage() {
     } catch (error) {
       changeErrormsg('An error occurred. Please try again later.')
     }
-  };
+  }
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);

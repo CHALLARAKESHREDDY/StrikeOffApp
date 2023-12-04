@@ -1,35 +1,11 @@
 import Axios from 'axios';
 import {useNavigate } from 'react-router-dom'
-import { css } from '@emotion/react';
 import React, { useState,useEffect} from 'react';
-
-
 import OtpInput from "react-otp-input";
 import "./index.css";
 
 
 // Define responsive styles using Emotion's css function
-const responsiveInputStyles = css`
-  width: 54px;
-  height: 54px;
-  font-size: 20px;
-  color: #000;
-  font-weight: 400;
-  caret-color: blue;
-
-  @media (max-width: 550px) {
-    width: 300px;
-    height: 35px;
-    /* Additional responsive styles */
-  }
-
-  @media (min-width: 1200px) {
-    width: 8%;
-    height: 4vh;
-    margin: 0 3%;
-    /* Additional styles for larger screens */
-  }
-`;
 
 // Merging the styles based on screen sizes
 
@@ -112,9 +88,9 @@ function OTPAuthenticationForgotPassword() {
       />
       <button onClick={handleSubmit} className="OTP-Button" type="button">Continue</button>
       {errorMsg === '' ? null : <p style={{color:"red"}}>{errorMsg}</p>}
-      
+     
     </div>
-
+    
     
     </div>
   );

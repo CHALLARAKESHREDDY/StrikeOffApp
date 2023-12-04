@@ -12,6 +12,10 @@ import ForgotPassword from "./components/ForgotPassword";
 import OTPAuthenticationForgotPassword from "./components/ForgotPasswordOTP";
 import NewPasswordSetup from "./components/NewPasswordSetup";
 import NotFound from "./components/NotFound";
+import MyAccountSection from "./components/MyAccountPage";
+import MyChatSection from "./components/MyChatPage";
+import ChatOneSection from "./components/OneChatPage";
+
 
 function App() {
   const [details,setDetails]=useState("")
@@ -29,8 +33,10 @@ function App() {
     <Route exact path="/signup" element={<SignupPage />} />
     <Route exact path="/home" element={<HomePage />} />
     <Route exact path="/landingAbout" element={<About />} />
-
+   <Route exact path="/account" element={<MyAccountSection/>} />
+   <Route exact path="/mychat" element={<MyChatSection/>} />
     <Route exact path="/OTPPage" element={<OTPAuthentication />} />
+    <Route exact path="/Chat-Section" element={<ChatOneSection/>} />
     <Route exact path="/forgotPassword" element={<ForgotPassword />} />
     <Route exact path="/forgot-OTP" element={<OTPAuthenticationForgotPassword />} />
     <Route path="/New-Password-Setup" element={<NewPasswordSetup />} />

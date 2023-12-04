@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 const app = express();
 app.use(express.json());
 
-const cors = require('cors'); // Import the cors middleware
+const cors = require('cors'); 
 app.use(cors());
 app.use(cors({ origin: '*' }))
 
@@ -12,14 +12,14 @@ app.use(cors({ origin: '*' }))
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 
-// Define your routes and middleware here
+
 
 let userName
 let passW3ord
 let EmailAddress
 let globalOTP
 
-// app.js (continued)
+
 const mongoose = require('mongoose');
 mongoose.set("strictQuery",true)
 const dbURL = 'mongodb+srv://StrikeOut:Rak1237@cluster0.oz1b53i.mongodb.net/'; // Replace with your MongoDB URL  mongodb://localhost:27017/?readPreference=primary&ssl=false&directConnection=true
@@ -339,10 +339,20 @@ app.put('/update-password',async(req,res)=>{
     
     res.send(response)
   }catch (e){
-    res.send(e.message)
-  }}
+    es.send(e.message)  }}
+
 })
 
+
+app.get("/chatWith",async(req,res)=>{
+  let {User}=req.query
+  try{
+    const response=await Task.findOne({username:User})
+    res.send(response)
+  }catch (e) {
+    console.log(e.message)
+  }
+})
 
 
 

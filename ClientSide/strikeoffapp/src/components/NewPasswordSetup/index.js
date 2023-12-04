@@ -1,9 +1,7 @@
 import axios from 'axios';
-
-
-
-
 import React, { useState } from 'react';
+import {Link} from 'react-router-dom'
+import { PiKeyReturnFill } from "react-icons/pi";
 import './index.css';
 
 function NewPasswordSetup() {
@@ -129,7 +127,10 @@ function NewPasswordSetup() {
             {error && <p style={{ color: 'red', margin: '20px' }}>{error}</p>}
           </div>
         </form>
+        <Link style={{width:"95%",alignSelf:"flex-end",display:"flex",justifyContent: "end",alignItems:"center",textDecoration:"none"}} to="/login"> <p style={{color:"#9999cc"}}>Login</p><PiKeyReturnFill style={{color:"#9999cc"}} />
+</Link>
       </div>
+      
     </div>
   );
 }

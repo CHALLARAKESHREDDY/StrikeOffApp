@@ -42,3 +42,8 @@ Content-Type: application/json
 {
     "otp":800859
 }
+
+
+###
+
+GET http://localhost:3007/chatWith/?User=praneetha

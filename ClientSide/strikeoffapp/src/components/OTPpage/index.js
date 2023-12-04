@@ -1,7 +1,8 @@
 import Axios from 'axios';
-
-import { css } from '@emotion/react';
 import React, { useState,useEffect} from 'react';
+import {Link, useNavigate } from 'react-router-dom'
+import { PiKeyReturnFill } from "react-icons/pi";
+
 
 
 import OtpInput from "react-otp-input";
@@ -46,8 +47,8 @@ function OTPAuthentication() {
 
     try {
       const response = await Axios.post('https://strikeout-serverside.onrender.com/verify-otp', { otp});
-    
-      if (response.data==="true") {
+
+      if (response.data==true) {
         setSucessView(true)
         setErrorMsg('SignedUp Successfully');
       } else {
@@ -61,7 +62,11 @@ function OTPAuthentication() {
 
   return (
     <div className="OTP-Container">
-    { successView ?<div style={{textAlign:"center"}}> <FcApproval style={{fontSize:"50px"}}/><p style={{color:"green"}}>{errorMsg}</p></div>:<div className="App">
+    { successView ?<div style={{textAlign:"center"}}> <FcApproval style={{fontSize:"50px"}}/><p style={{color:"green"}}>{errorMsg}</p>
+    
+    <Link style={{alignSelf:"flex-end",display:"flex",justifyContent: "center",alignItems:"center",textDecoration:"none",marginTop:"20px"}} to="/login"> <p style={{color:"#9999cc"}}>Login</p><PiKeyReturnFill style={{color:"#9999cc"}} />
+</Link>
+    </div>:<div className="App">
       <h1 className="OTP-Heading">OTP Authentication</h1>
       <p className="OTP-Paragraph">OTP has been sent to your mail</p>
       <OtpInput
@@ -92,7 +97,6 @@ function OTPAuthentication() {
       
     </div> }
 
-    
     </div>
   );
 }

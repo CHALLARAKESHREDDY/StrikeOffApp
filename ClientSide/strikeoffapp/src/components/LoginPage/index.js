@@ -24,6 +24,7 @@ function LoginPage() {
       return;
     }
 
+
     try {
       let response = await axios.post('https://strikeout-serverside.onrender.com/login', {
         username: emailAddress,
@@ -31,13 +32,13 @@ function LoginPage() {
       });
 
       if (response.data.resultMsg === 'Login Successfull') {
-        Cookies.set('userDetails', JSON.stringify(response.data.details));
-        console.log(response.data.details)
-        await Cookies.set('jwtToken', response.data.jwtToken, { expires: 3 });
-        await changeErrormsg('Your JWT has been set! Now you can start Saving');
-        await history('/home');
+        Cookies.set('userDetails', JSON.stringify(response.data.details))
+      
+        Cookies.set('jwtToken', response.data.jwtToken, { expires: 3 })
+        history('/home');
+       
       } else {
-        changeErrormsg(response.data);
+        changeErrormsg(response.data)
       }
     } catch (e) {
       changeErrormsg(e.message);
@@ -48,9 +49,6 @@ function LoginPage() {
     history('/signup');
   }
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  }
 
   return (
     <section className="container">
