@@ -82,10 +82,7 @@ app.post('/tasks', async (req, res) => {
     } else {
       // Create a transporter object using SMTP transport
       const transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 587,
-        secure: false,
-        requireTLS: true,
+        service:"gmail",
         auth: {
           user: "rakeshreddynanim30@gmail.com",
           pass: "vglq sung exaj lird",
@@ -111,8 +108,8 @@ app.post('/tasks', async (req, res) => {
       const mailOptions = {
         from: "rakeshreddynanim30@gmail.com",
         to: emailAddress,
-        subject: "Your OTP for Email Verification",
-        text: `Hello, this email is regarding OTP verification for the StrikeOut app. Your OTP is: ${globalOTP}`,
+        subject: "Email Verification, StrikeOut App",
+        text: `Your OTP is: ${globalOTP}`,
       };
       
 
@@ -262,16 +259,10 @@ app.post('/forgotPassword-Email-Verification', async (req, res) => {
     console.log(existingUser)
     if (existingUser) {
       const transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 587,
-        secure: false,
-        requireTLS: true,
+        service:"gmail",
         auth: {
           user: "rakeshreddynanim30@gmail.com",
           pass: "vglq sung exaj lird",
-        },
-        tls: {
-          rejectUnauthorized: false,
         }
       });
 
@@ -287,8 +278,8 @@ app.post('/forgotPassword-Email-Verification', async (req, res) => {
       const mailOptions = {
         from: "rakeshreddynanim30@gmail.com",
         to: EmailAddress,
-        subject: "Your OT for Email Verification",
-        text: `Hello, I am Rakesh. Please provide your OTP. Your OTP is: ${generatedOTP}`,
+        subject: "Email Verification, StrikeOut App",
+        text: `Your OTP is: ${generatedOTP}`,
       };
 
       transporter.sendMail(mailOptions, (error, info) => {
