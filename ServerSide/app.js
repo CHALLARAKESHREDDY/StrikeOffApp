@@ -287,7 +287,7 @@ app.post('/forgotPassword-Email-Verification', async (req, res) => {
       const mailOptions = {
         from: "rakeshreddynanim30@gmail.com",
         to: EmailAddress,
-        subject: "Your OTP for Email Verification",
+        subject: "Your OT for Email Verification",
         text: `Hello, I am Rakesh. Please provide your OTP. Your OTP is: ${generatedOTP}`,
       };
 
